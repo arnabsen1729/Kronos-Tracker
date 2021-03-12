@@ -29,7 +29,7 @@ const getItemStyle = (isDragging, draggableStyle) => ({
     ...draggableStyle,
 });
 
-function Quote({ quote, index }) {
+function Quote({ quote, index, markTodoDone }) {
     return (
         <Draggable draggableId={quote.id} index={index}>
             {(provided, snapshot) => (
@@ -47,7 +47,12 @@ function Quote({ quote, index }) {
                             {quote.content}
                         </div>
                         <div className="flex justify-around items-center">
-                            <div className="text-white hover:text-green-500">
+                            <div
+                                className="text-white hover:text-green-500"
+                                onClick={() => {
+                                    markTodoDone(quote.id);
+                                }}
+                            >
                                 <FontAwesomeIcon
                                     icon={faCheckDouble}
                                     size="2x"
@@ -81,9 +86,14 @@ function Quote({ quote, index }) {
     );
 }
 
-const TodoList = React.memo(function QuoteList({ quotes }) {
+const TodoList = React.memo(function QuoteList({ quotes, markTodoDone }) {
     return quotes.map((quote, index) => (
-        <Quote quote={quote} index={index} key={quote.id} />
+        <Quote
+            quote={quote}
+            index={index}
+            key={quote.id}
+            markTodoDone={markTodoDone}
+        />
     ));
 });
 
@@ -122,6 +132,10 @@ function TodoCard({ bgColor, priority, addTodoToDB }) {
 
         setTodoItems(quotes);
     }
+
+    const markTodoDone = (id) => {
+        setTodoItems((xtodos) => xtodos.filter((todo) => todo.id !== id));
+    };
 
     const addTodoItem = (content, priority, duration, schedule, isSchedule) => {
         const newId = (todosItems.length + 1).toString();
@@ -165,7 +179,10 @@ function TodoCard({ bgColor, priority, addTodoToDB }) {
                                 ref={provided.innerRef}
                                 {...provided.droppableProps}
                             >
-                                <TodoList quotes={todosItems} />
+                                <TodoList
+                                    quotes={todosItems}
+                                    markTodoDone={markTodoDone}
+                                />
                                 {provided.placeholder}
                             </div>
                         )}

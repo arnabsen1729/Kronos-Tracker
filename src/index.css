@@ -1,0 +1,113 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+/* HOME PAGE */
+
+.home-body {
+  background: rgba(0, 0, 0, 0.9);
+  margin: 0;
+  color: #fff;
+}
+
+
+.home-showcase::after {
+  content: '';
+  height: 100vh;
+  width: 100%;
+  background-image: url(https://image.ibb.co/gzOBup/showcase.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  display: block;
+  filter: blur(10px);
+  -webkit-filter: blur(10px);
+  transition: all 1000ms;
+}
+
+.home-showcase:hover::after{
+  filter: blur(0px);
+  -webkit-filter: blur(0px);
+  transition: all 1000ms;
+}
+.home-showcase{
+    pointer-events: none;
+}
+.home-content{
+    pointer-events: auto;
+}
+.home-showcase .home-logo{
+  filter: blur(0px);
+  -webkit-filter: blur(0px);
+  transition: all 1000ms;
+}
+.home-showcase .home-logo:hover{
+  filter: blur(2px);
+  -webkit-filter: blur(2px);
+  transition: all 1000ms;
+}
+
+
+.home-content {
+  position: absolute;
+  z-index: 1;
+  top: 10%;
+  left: 50%;
+  margin-top: 105px;
+  margin-left: -145px;
+  width: 300px;
+  height: 350px;
+  text-align: center;
+  transition: all 1000ms;
+}
+
+.home-content .home-logo {
+  height: 180px;
+  width: 180px;
+}
+
+.home-content .home-title {
+  font-size: 2.2rem;
+  margin-top: 1rem;
+}
+
+.home-content {
+  line-height: 1.7;
+  margin-top: 1rem;
+}
+
+/* Small Screens */
+@media (max-width: 560px) {
+  /* .home-showcase::after {
+    height: 50vh;
+  } */
+
+  .home-content {
+    top: 5%;
+    margin-top: 5px;
+  }
+
+  .home-content .home-logo {
+    height: 140px;
+    width: 140px;
+  }
+
+  .home-content .text {
+    display: none;
+  }
+
+
+}
+
+/* Landscape */
+@media (max-height: 500px) {
+  .home-content .home-title,
+  .home-content  {
+    display: none;
+  }
+
+  .home-content {
+    top: 0;
+  }
+}

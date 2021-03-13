@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import ReactModal from 'react-modal';
+import Chart from '../Chart/Chart';
 import {
     markTodoDB,
     addTodoDB,
@@ -11,6 +13,7 @@ import Sidebar from '../Sidebar/Sidebar';
 
 function Dashboard({ user, isAuthorized }) {
     let [allTodos, setAllTodos] = useState([]);
+    let [showChart, setShowChart] = useState(false);
     let headingClassName = (color) => {
         return `text-3xl font-bold text-${color}-700`;
     };
@@ -36,9 +39,13 @@ function Dashboard({ user, isAuthorized }) {
         }
     }, [isAuthorized]);
 
+    const showChartFn = () => {
+        setShowChart(() => true);
+    };
+
     const dashboardItems = (
         <>
-            <Sidebar />
+            <Sidebar showChartFn={showChartFn} />
             <div className="pl-0 md:pl-16 md:h-screen w-full md:pt-5">
                 <div className="md:h-1/2 md:flex md:flex-row w-full">
                     <div className="h-96 md:h-full px-3 w-screen md:w-1/2 flex flex-col">
@@ -95,6 +102,17 @@ function Dashboard({ user, isAuthorized }) {
                             deleteTodoToDB={deleteTodoToDB}
                         />
                     </div>
+                </div>
+                <div>
+                    <ReactModal
+                        onRequestClose={() => setShowChart(false)}
+                        shouldCloseOnEsc={true}
+                        ariaHideApp={false}
+                        isOpen={showChart}
+                        contentLabel="Minimal Modal Example"
+                    >
+                        <Chart user={user} />
+                    </ReactModal>
                 </div>
             </div>
         </>

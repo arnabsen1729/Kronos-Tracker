@@ -29,7 +29,7 @@ const getItemStyle = (isDragging, draggableStyle) => ({
     ...draggableStyle,
 });
 
-function Quote({ quote, index, markTodoDone }) {
+function Quote({ quote, index, markTodoDone, bgColor }) {
     return (
         <Draggable draggableId={quote.id} index={index}>
             {(provided, snapshot) => (
@@ -41,14 +41,17 @@ function Quote({ quote, index, markTodoDone }) {
                         snapshot.isDragging,
                         provided.draggableProps.style
                     )}
+                    className="pt-3"
                 >
-                    <div className="mx-2 border-b border-black mt-4 py-2 grid grid-cols-3">
-                        <div className="px-2 text-2xl col-span-2">
+                    <div
+                        className={`mx-2 rounded-lg bg-${bgColor}-500 hover:bg-${bgColor}-600 transtion duration-200 text-white py-1 grid grid-cols-3 items-center`}
+                    >
+                        <div className="px-2 text-xl col-span-2">
                             {quote.content}
                         </div>
                         <div className="flex justify-around items-center">
                             <div
-                                className="text-white hover:text-green-500"
+                                className={`text-${bgColor}-400 cursor-pointer hover:text-green-300`}
                                 onClick={() => {
                                     markTodoDone(quote);
                                 }}
@@ -62,20 +65,24 @@ function Quote({ quote, index, markTodoDone }) {
                                 href={calendarURLGen(quote)}
                                 target="_blank"
                                 rel="noreferrer"
-                                className="text-white hover:text-yellow-700"
+                                className={`text-${bgColor}-400 hover:text-indigo-300`}
                             >
                                 <FontAwesomeIcon
                                     icon={faCalendarCheck}
                                     size="2x"
                                 />
                             </a>
-                            <div className="text-white hover:text-indigo-500">
+                            <div
+                                className={`text-${bgColor}-400 cursor-pointer hover:text-gray-300`}
+                            >
                                 <FontAwesomeIcon
                                     icon={faPlayCircle}
                                     size="2x"
                                 />
                             </div>
-                            <div className="text-white hover:text-red-500">
+                            <div
+                                className={`text-${bgColor}-400 cursor-pointer hover:text-black`}
+                            >
                                 <FontAwesomeIcon icon={faTrash} size="2x" />
                             </div>
                         </div>
@@ -86,13 +93,18 @@ function Quote({ quote, index, markTodoDone }) {
     );
 }
 
-const TodoList = React.memo(function QuoteList({ quotes, markTodoDone }) {
+const TodoList = React.memo(function QuoteList({
+    quotes,
+    bgColor,
+    markTodoDone,
+}) {
     return quotes.map((quote, index) => (
         <Quote
             quote={quote}
             index={index}
             key={quote.id}
             markTodoDone={markTodoDone}
+            bgColor={bgColor}
         />
     ));
 });
@@ -113,7 +125,7 @@ function TodoCard({
 
     const element = (
         <div
-            className={`rounded-full shadow-md hover:shadow-lg text-${bgColor}-700`}
+            className={`rounded-full border border-${bgColor}-700 shadow-md hover:shadow-lg bg-white text-${bgColor}-700`}
         >
             <FontAwesomeIcon icon={faPlusCircle} size="3x" />
         </div>
@@ -183,31 +195,36 @@ function TodoCard({
     };
 
     const todoListItems = (
-        <div className={`${bgColorClass()} h-96 relative rounded-md`}>
-            {showModal ? (
-                <Modal {...{ priority, closeModalHandler, addTodoItem }} />
-            ) : null}
-            <div>
-                <DragDropContext onDragEnd={onDragEnd}>
-                    <Droppable droppableId="list">
-                        {(provided) => (
-                            <div
-                                ref={provided.innerRef}
-                                {...provided.droppableProps}
-                            >
-                                <TodoList
-                                    quotes={todosItems}
-                                    markTodoDone={markTodoDone}
-                                    deleteTodo={deleteTodo}
-                                />
-                                {provided.placeholder}
-                            </div>
-                        )}
-                    </Droppable>
-                </DragDropContext>
+        <div className="h-full overflow-hidden relative">
+            <div
+                className={`${bgColorClass()} h-full overflow-y-scroll relative rounded-lg`}
+            >
+                {showModal ? (
+                    <Modal {...{ priority, closeModalHandler, addTodoItem }} />
+                ) : null}
+                <div className="mb-16">
+                    <DragDropContext onDragEnd={onDragEnd}>
+                        <Droppable droppableId="list">
+                            {(provided) => (
+                                <div
+                                    ref={provided.innerRef}
+                                    {...provided.droppableProps}
+                                >
+                                    <TodoList
+                                        quotes={todosItems}
+                                        markTodoDone={markTodoDone}
+                                        deleteTodo={deleteTodo}
+                                        bgColor={bgColor}
+                                    />
+                                    {provided.placeholder}
+                                </div>
+                            )}
+                        </Droppable>
+                    </DragDropContext>
+                </div>
             </div>
             <button
-                className="absolute bottom-0 right-0 mr-5 mb-5 outline-none focus:outline-none"
+                className="absolute bottom-0 right-0 pb-3 pr-3 outline-none focus:outline-none"
                 type="button"
                 onClick={() => setShowModal(true)}
             >

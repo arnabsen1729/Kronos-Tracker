@@ -35,6 +35,20 @@ const TODO_CLC = 'todo-react-trial';
 //     }
 // };
 
+const signOut = () => {
+    firebase
+        .auth()
+        .signOut()
+        .then(() => {
+            // setIsAuthorized(false);
+            // setUserDetails(null);
+            console.log('Sign out successful');
+        })
+        .catch((error) => {
+            // An error happened.
+        });
+};
+
 const addTodoDB = (user, todo) => {
     db.collection(TODO_CLC)
         .doc(user.uid)
@@ -88,4 +102,4 @@ const deleteTodoDB = (user, todo) => {
         });
 };
 
-export { provider, addTodoDB, markTodoDB, deleteTodoDB };
+export { provider, addTodoDB, markTodoDB, deleteTodoDB, signOut };

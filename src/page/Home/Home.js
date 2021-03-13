@@ -79,19 +79,19 @@ function Home() {
             });
     };
 
-    const logOut = () => {
-        firebase
-            .auth()
-            .signOut()
-            .then(() => {
-                setIsAuthorized(false);
-                setUserDetails(null);
-                //console.log("Sign out successful", isAuthorized);
-            })
-            .catch((error) => {
-                // An error happened.
-            });
-    };
+    // const logOut = () => {
+    //     firebase
+    //         .auth()
+    //         .signOut()
+    //         .then(() => {
+    //             setIsAuthorized(false);
+    //             setUserDetails(null);
+    //             //console.log("Sign out successful", isAuthorized);
+    //         })
+    //         .catch((error) => {
+    //             // An error happened.
+    //         });
+    // };
 
     const landingComp = () => {
         return (
@@ -124,7 +124,7 @@ function Home() {
     const dashboardComp = () => {
         return (
             <div>
-                <Dashboard logOutFunc={logOut} user={userDetails} />
+                <Dashboard user={userDetails} />
             </div>
         );
     };

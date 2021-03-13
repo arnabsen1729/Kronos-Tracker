@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
@@ -29,7 +29,7 @@ const getItemStyle = (isDragging, draggableStyle) => ({
     ...draggableStyle,
 });
 
-function Quote({ quote, index, markTodoDone, bgColor }) {
+function Quote({ quote, index, markTodoDone, bgColor, deleteTodo }) {
     return (
         <Draggable draggableId={quote.id} index={index}>
             {(provided, snapshot) => (
@@ -82,6 +82,9 @@ function Quote({ quote, index, markTodoDone, bgColor }) {
                             </div>
                             <div
                                 className={`text-${bgColor}-400 cursor-pointer hover:text-black`}
+                                onClick={() => {
+                                    deleteTodo(quote);
+                                }}
                             >
                                 <FontAwesomeIcon icon={faTrash} size="2x" />
                             </div>
@@ -97,6 +100,7 @@ const TodoList = React.memo(function QuoteList({
     quotes,
     bgColor,
     markTodoDone,
+    deleteTodo,
 }) {
     return quotes.map((quote, index) => (
         <Quote
@@ -104,6 +108,7 @@ const TodoList = React.memo(function QuoteList({
             index={index}
             key={quote.id}
             markTodoDone={markTodoDone}
+            deleteTodo={deleteTodo}
             bgColor={bgColor}
         />
     ));
@@ -115,6 +120,7 @@ function TodoCard({
     addTodoToDB,
     markTodoToDB,
     deleteTodoToDB,
+    allTodos,
 }) {
     let [todosItems, setTodoItems] = useState(() => []);
     let [showModal, setShowModal] = useState(false);
@@ -122,6 +128,13 @@ function TodoCard({
     const bgColorClass = () => {
         return `bg-${bgColor}-200`;
     };
+
+    useEffect(() => {
+        console.log('Card', allTodos);
+        setTodoItems(() =>
+            allTodos.filter((t) => t.priority === priority && !t.completed)
+        );
+    }, [allTodos]);
 
     const element = (
         <div
@@ -170,7 +183,7 @@ function TodoCard({
             schedule = '';
         }
         addTodoToDB({
-            newId,
+            id: newId,
             content,
             priority,
             duration,

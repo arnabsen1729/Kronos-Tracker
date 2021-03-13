@@ -124,7 +124,7 @@ function Home() {
     const dashboardComp = () => {
         return (
             <div>
-                <Dashboard user={userDetails} />
+                <Dashboard user={userDetails} isAuthorized={isAuthorized} />
             </div>
         );
     };

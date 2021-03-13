@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
-import { markTodoDB, addTodoDB, deleteTodoDB } from '../../db/db';
+import React, { useState, useEffect } from 'react';
+import { markTodoDB, addTodoDB, deleteTodoDB, fetchTodosDB } from '../../db/db';
 import TodoCard from '../TodoCard/TodoCard';
 import Sidebar from '../Sidebar/Sidebar';
 
-function Dashboard({ user }) {
+function Dashboard({ user, isAuthorized }) {
     const [showTimer, setShowTimer] = useState(false);
-
+    let [allTodos, setAllTodos] = useState([]);
     let headingClassName = (color) => {
         return `text-3xl font-bold text-${color}-700`;
     };
@@ -22,6 +22,14 @@ function Dashboard({ user }) {
         deleteTodoDB(user, todo);
     };
 
+    useEffect(() => {
+        if (isAuthorized) {
+            fetchTodosDB(user).then((todos) => {
+                setAllTodos(() => todos);
+            });
+        }
+    }, [isAuthorized]);
+
     const dashboardItems = (
         <>
             <Sidebar />
@@ -33,6 +41,7 @@ function Dashboard({ user }) {
                         </h1>
                         <TodoCard
                             priority={1}
+                            allTodos={allTodos}
                             bgColor="red"
                             addTodoToDB={addTodoToDB}
                             markTodoToDB={markTodoToDB}
@@ -45,6 +54,7 @@ function Dashboard({ user }) {
                         </h1>
                         <TodoCard
                             priority={2}
+                            allTodos={allTodos}
                             bgColor="blue"
                             addTodoToDB={addTodoToDB}
                             markTodoToDB={markTodoToDB}
@@ -60,6 +70,7 @@ function Dashboard({ user }) {
                         <TodoCard
                             priority={3}
                             bgColor="green"
+                            allTodos={allTodos}
                             addTodoToDB={addTodoToDB}
                             markTodoToDB={markTodoToDB}
                             deleteTodoToDB={deleteTodoToDB}
@@ -71,6 +82,7 @@ function Dashboard({ user }) {
                         </h1>
                         <TodoCard
                             priority={4}
+                            allTodos={allTodos}
                             bgColor="yellow"
                             addTodoToDB={addTodoToDB}
                             markTodoToDB={markTodoToDB}

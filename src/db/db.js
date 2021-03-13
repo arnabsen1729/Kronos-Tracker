@@ -63,6 +63,8 @@ const markTodoDB = (user, todo) => {
     console.log('Marking.. ', todo);
     let todosRef = db.collection(TODO_CLC).doc(user.uid).collection('todos');
     todosRef
+        .where('id', '==', todo.id)
+        .where('priority', '==', todo.priority)
         .get()
         .then((querySnapshot) => {
             querySnapshot.forEach((doc) => {
@@ -82,6 +84,8 @@ const deleteTodoDB = (user, todo) => {
     console.log('Deleting... ', todo);
     let todosRef = db.collection(TODO_CLC).doc(user.uid).collection('todos');
     todosRef
+        .where('id', '==', todo.id)
+        .where('priority', '==', todo.priority)
         .get()
         .then((querySnapshot) => {
             querySnapshot.forEach((doc) => {
@@ -102,4 +106,23 @@ const deleteTodoDB = (user, todo) => {
         });
 };
 
-export { provider, addTodoDB, markTodoDB, deleteTodoDB, signOut };
+const fetchTodosDB = async (user) => {
+    console.log('Fetching Docs');
+    let todos = [];
+    let todosRef = db.collection(TODO_CLC).doc(user.uid).collection('todos');
+    await todosRef
+        .get()
+        .then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+                todos.push(doc.data());
+                console.log(doc.id, ' => ', doc.data());
+            });
+        })
+        .catch((error) => {
+            console.log('Error getting documents: ', error);
+        });
+    console.log('DB.JS', todos);
+    return todos;
+};
+
+export { provider, addTodoDB, markTodoDB, deleteTodoDB, signOut, fetchTodosDB };

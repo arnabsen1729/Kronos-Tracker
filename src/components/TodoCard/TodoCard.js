@@ -50,7 +50,7 @@ function Quote({ quote, index, markTodoDone }) {
                             <div
                                 className="text-white hover:text-green-500"
                                 onClick={() => {
-                                    markTodoDone(quote.id);
+                                    markTodoDone(quote);
                                 }}
                             >
                                 <FontAwesomeIcon
@@ -97,10 +97,15 @@ const TodoList = React.memo(function QuoteList({ quotes, markTodoDone }) {
     ));
 });
 
-function TodoCard({ bgColor, priority, addTodoToDB }) {
+function TodoCard({
+    bgColor,
+    priority,
+    addTodoToDB,
+    markTodoToDB,
+    deleteTodoToDB,
+}) {
     let [todosItems, setTodoItems] = useState(() => []);
-
-    const [showModal, setShowModal] = useState(false);
+    let [showModal, setShowModal] = useState(false);
 
     const bgColorClass = () => {
         return `bg-${bgColor}-200`;
@@ -133,8 +138,18 @@ function TodoCard({ bgColor, priority, addTodoToDB }) {
         setTodoItems(quotes);
     }
 
-    const markTodoDone = (id) => {
-        setTodoItems((xtodos) => xtodos.filter((todo) => todo.id !== id));
+    const markTodoDone = (todo) => {
+        markTodoToDB(todo);
+        setTodoItems((xtodos) =>
+            xtodos.filter((xtodo) => xtodo.id !== todo.id)
+        );
+    };
+
+    const deleteTodo = (todo) => {
+        deleteTodoToDB(todo);
+        setTodoItems((xtodos) =>
+            xtodos.filter((xtodo) => xtodo.id !== todo.id)
+        );
     };
 
     const addTodoItem = (content, priority, duration, schedule, isSchedule) => {
@@ -143,6 +158,7 @@ function TodoCard({ bgColor, priority, addTodoToDB }) {
             schedule = '';
         }
         addTodoToDB({
+            newId,
             content,
             priority,
             duration,
@@ -166,7 +182,7 @@ function TodoCard({ bgColor, priority, addTodoToDB }) {
         setShowModal(false);
     };
 
-    return (
+    const todoListItems = (
         <div className={`${bgColorClass()} h-96 relative rounded-md`}>
             {showModal ? (
                 <Modal {...{ priority, closeModalHandler, addTodoItem }} />
@@ -182,6 +198,7 @@ function TodoCard({ bgColor, priority, addTodoToDB }) {
                                 <TodoList
                                     quotes={todosItems}
                                     markTodoDone={markTodoDone}
+                                    deleteTodo={deleteTodo}
                                 />
                                 {provided.placeholder}
                             </div>
@@ -198,6 +215,8 @@ function TodoCard({ bgColor, priority, addTodoToDB }) {
             </button>
         </div>
     );
+
+    return todoListItems;
 }
 
 export default TodoCard;

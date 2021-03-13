@@ -1,19 +1,31 @@
-import React from 'react';
-import { addTodoDB } from '../../db/db';
+import React, { useState } from 'react';
+import { markTodoDB, addTodoDB, deleteTodoDB } from '../../db/db';
 import TodoCard from '../TodoCard/TodoCard';
 
 function Dashboard({ user, logOutFunc }) {
+    const [showTimer, setShowTimer] = useState(false);
+
     let headingClassName = (color) => {
         return `text-3xl font-bold text-${color}-700 mb-3`;
     };
 
-    let addTodoToDB = (todo) => {
+    const addTodoToDB = (todo) => {
         addTodoDB(user, todo);
     };
 
-    return (
+    const markTodoToDB = (todo) => {
+        markTodoDB(user, todo);
+    };
+
+    const deleteTodoToDB = (todo) => {
+        deleteTodoDB(user, todo);
+    };
+
+    const dashboardItems = (
         <>
             <div>{user.displayName}</div>
+            {/* <button onClick={() => setShowTimer(true)}>TIMER</button> */}
+
             <button
                 onClick={logOutFunc}
                 className="text-sm mt-2 mx-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
@@ -29,6 +41,8 @@ function Dashboard({ user, logOutFunc }) {
                         priority={1}
                         bgColor="red"
                         addTodoToDB={addTodoToDB}
+                        markTodoToDB={markTodoToDB}
+                        deleteTodoToDB={deleteTodoToDB}
                     />
                 </div>
                 <div className="md:mt-7">
@@ -39,6 +53,8 @@ function Dashboard({ user, logOutFunc }) {
                         priority={2}
                         bgColor="blue"
                         addTodoToDB={addTodoToDB}
+                        markTodoToDB={markTodoToDB}
+                        deleteTodoToDB={deleteTodoToDB}
                     />
                 </div>
                 <div>
@@ -49,6 +65,8 @@ function Dashboard({ user, logOutFunc }) {
                         priority={3}
                         bgColor="green"
                         addTodoToDB={addTodoToDB}
+                        markTodoToDB={markTodoToDB}
+                        deleteTodoToDB={deleteTodoToDB}
                     />
                 </div>
                 <div>
@@ -59,11 +77,15 @@ function Dashboard({ user, logOutFunc }) {
                         priority={4}
                         bgColor="yellow"
                         addTodoToDB={addTodoToDB}
+                        markTodoToDB={markTodoToDB}
+                        deleteTodoToDB={deleteTodoToDB}
                     />
                 </div>
             </div>
         </>
     );
+
+    return <>{showTimer ? <div>Timer</div> : dashboardItems}</>;
 }
 
 export default Dashboard;

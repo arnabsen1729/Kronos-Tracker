@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import './Countdown.css';
+// import './Countdown.css';
 import {
     faCheckCircle,
     faExclamationCircle,
@@ -117,16 +117,8 @@ function Countdown({ todo, giveUpFn, completeFn }) {
     }
 
     return (
-        <div className="countdown-wrap h-screen">
-            {/* <video loop autoPlay style={{ position: "absolute", height: "100%", width: "100%", objectFit: "cover" }}>
-                <source src={process.env.PUBLIC_URL + "/assets/video.mp4"} type="video/mp4" />
-            </video> */}
-            <audio loop autoplay>
-                <source
-                    src={process.env.PUBLIC_URL + '/assets/rain.mp3'}
-                    type="audio/mp3"
-                />
-            </audio>
+        <div className="countdown-wrap">
+
             <div id="app" className="countdown-app border border-red-700">
                 <div className="base-timer ">
                     <svg
@@ -158,21 +150,11 @@ function Countdown({ todo, giveUpFn, completeFn }) {
                     </span>
                 </div>
             </div>
-            <div className="countdown-button-wrap">
-                <div
-                    onClick={done}
-                    className="countdown-button hover:bg-gray-500 cursor-pointer"
-                >
-                    <FontAwesomeIcon
-                        icon={faCheckCircle}
-                        size="2x"
-                        className="mr-2"
-                    />
-                    Done
-                </div>
+            <div className="countdown-button-wrap w-80 pt-8 flex justify-around">
+
                 <div
                     onClick={giveUp}
-                    className="countdown-button hover:bg-gray-500 cursor-pointer"
+                    className="countdown-button px-4 py-4 hover:bg-red-500 cursor-pointer transform hover:scale-110"
                 >
                     <FontAwesomeIcon
                         icon={faExclamationCircle}
@@ -180,6 +162,17 @@ function Countdown({ todo, giveUpFn, completeFn }) {
                         className="mr-2"
                     />{' '}
                     Give Up
+                </div>
+                <div
+                    onClick={done}
+                    className="countdown-button px-4 py-4 hover:bg-green-500 cursor-pointer transform hover:scale-110"
+                >
+                    <FontAwesomeIcon
+                        icon={faCheckCircle}
+                        size="2x"
+                        className="mr-2"
+                    />
+                    Done
                 </div>
             </div>
         </div>

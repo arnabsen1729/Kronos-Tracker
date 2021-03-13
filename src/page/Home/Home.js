@@ -112,9 +112,9 @@ function Home() {
                         <div className="flex flex-col justify-items-center">
                             <button
                                 onClick={logIn}
-                                className="flex items-center justify-center bg-red-400 hover:bg-red-700 focus:outline-none text-white font-bold py-2 px-4 rounded w-40 mx-auto "
+                                className="flex items-center justify-center bg-red-400 hover:bg-red-700 focus:outline-none text-white font-bold py-2 px-4 rounded w-48 mx-auto "
                             >
-                                Sign in with
+                                Continue with
                                     <img src={process.env.PUBLIC_URL + "/assets/google.svg"} style={{ height: "25px", width: "25px", paddingLeft: "8px" }}></img>
 
                             </button>

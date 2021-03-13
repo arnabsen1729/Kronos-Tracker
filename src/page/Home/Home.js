@@ -3,7 +3,12 @@ import React, { useState, useEffect } from 'react';
 import firebase from 'firebase/app';
 import 'firebase/auth';
 //import { Redirect } from 'react-router-dom'
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+    faGoogle,
+    faUser,
+    faGooglePlusG
+} from '@fortawesome/free-solid-svg-icons';
 import Dashboard from '../../components/Dashboard/Dashboard';
 import firebaseConfig from '../../firebaseConfig';
 import { provider } from '../../db/db';
@@ -104,18 +109,21 @@ function Home() {
                             alt="Traversy Media"
                         ></img>
                         <div className="home-title mb-2">Your ToDo Manager</div>
-                        <button
-                            onClick={logIn}
-                            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                        >
-                            Sign in with Google
-                        </button>
-                        <button
-                            onClick={logInAnonymous}
-                            className="bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded w-full"
-                        >
-                            Sign in as guest
-                        </button>
+                        <div className="flex flex-col justify-items-center">
+                            <button
+                                onClick={logIn}
+                                className="flex items-center justify-center bg-red-400 hover:bg-red-700 focus:outline-none text-white font-bold py-2 px-4 rounded w-40 mx-auto "
+                            >
+                                Sign in with
+                                    <img src={process.env.PUBLIC_URL + "/assets/google.svg"} style={{ height: "25px", width: "25px", paddingLeft: "8px" }}></img>
+
+                            </button>
+                            <button
+                                onClick={logInAnonymous}
+                                className="bg-blue-500 hover:bg-blue-700 text-white flex items-center focus:outline-none justify-center font-bold py-2 px-4 rounded mx-auto w-52 mt-4"
+                            >
+                                Sign in as guest<FontAwesomeIcon icon={faUser} size="2x" className="pl-4" />
+                            </button></div>
                     </div>
                 </header>
             </div>

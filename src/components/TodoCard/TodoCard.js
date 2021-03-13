@@ -52,14 +52,14 @@ function Quote({
                     className="pt-3"
                 >
                     <div
-                        className={`mx-2 rounded-lg bg-${bgColor}-500 hover:bg-${bgColor}-600 transtion duration-200 text-white py-1 grid grid-cols-3 items-center`}
+                        className={`mx-2 rounded-lg bg-${bgColor}-500 hover:bg-${bgColor}-600 transtion duration-200 text-white py-1 grid grid-cols-3 items-center todo-reveal`}
                     >
                         <div className="px-2 text-xl col-span-2">
                             {quote.content}
                         </div>
                         <div className="flex justify-around items-center">
                             <div
-                                className={`text-${bgColor}-400 cursor-pointer hover:text-green-300`}
+                                className={`text-${bgColor}-400 cursor-pointer hover:text-green-300 tooltip`}
                                 onClick={() => {
                                     markTodoDone(quote);
                                 }}
@@ -68,20 +68,21 @@ function Quote({
                                     icon={faCheckDouble}
                                     size="2x"
                                 />
+                                <span className="tooltiptext">Mark as done</span>
                             </div>
                             <a
                                 href={calendarURLGen(quote)}
                                 target="_blank"
                                 rel="noreferrer"
-                                className={`text-${bgColor}-400 hover:text-indigo-300`}
+                                className={`text-${bgColor}-400 hover:text-indigo-300 tooltip`}
                             >
                                 <FontAwesomeIcon
                                     icon={faCalendarCheck}
                                     size="2x"
-                                />
+                                /><span className="tooltiptext">Add to calender</span>
                             </a>
                             <div
-                                className={`text-${bgColor}-400 cursor-pointer hover:text-gray-300`}
+                                className={`text-${bgColor}-400 cursor-pointer hover:text-gray-300 tooltip`}
                                 onClick={() => {
                                     setTimerValues(quote);
                                 }}
@@ -89,15 +90,15 @@ function Quote({
                                 <FontAwesomeIcon
                                     icon={faPlayCircle}
                                     size="2x"
-                                />
+                                /><span className="tooltiptext">Start timer</span>
                             </div>
                             <div
-                                className={`text-${bgColor}-400 cursor-pointer hover:text-black`}
+                                className={`text-${bgColor}-400 cursor-pointer hover:text-black tooltip`}
                                 onClick={() => {
                                     deleteTodo(quote);
                                 }}
                             >
-                                <FontAwesomeIcon icon={faTrash} size="2x" />
+                                <FontAwesomeIcon icon={faTrash} size="2x" /><span className="tooltiptext">Delete</span>
                             </div>
                         </div>
                     </div>
@@ -152,7 +153,7 @@ function TodoCard({
 
     const element = (
         <div
-            className={`rounded-full border border-${bgColor}-700 shadow-md hover:shadow-lg bg-white text-${bgColor}-700`}
+            className={`rounded-full border border-${bgColor}-700 shadow-md hover:shadow-lg bg-white text-${bgColor}-700 transform hover:scale-125`}
         >
             <FontAwesomeIcon icon={faPlusCircle} size="3x" />
         </div>

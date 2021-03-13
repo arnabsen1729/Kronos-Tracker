@@ -1,5 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { markTodoDB, addTodoDB, deleteTodoDB, fetchTodosDB } from '../../db/db';
+import {
+    markTodoDB,
+    addTodoDB,
+    deleteTodoDB,
+    fetchTodosDB,
+    updatePoints,
+} from '../../db/db';
 import TodoCard from '../TodoCard/TodoCard';
 import Sidebar from '../Sidebar/Sidebar';
 
@@ -14,6 +20,7 @@ function Dashboard({ user, isAuthorized }) {
     };
 
     const markTodoToDB = (todo) => {
+        updatePoints(user, todo);
         markTodoDB(user, todo);
     };
 

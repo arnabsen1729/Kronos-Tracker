@@ -137,7 +137,6 @@ function TodoCard({
 }) {
     let [todosItems, setTodoItems] = useState(() => []);
     let [showModal, setShowModal] = useState(false);
-    // let [showTimer, setShowTimer] = useState(false);
     let [timerState, setTimerState] = useState({});
 
     const bgColorClass = () => {

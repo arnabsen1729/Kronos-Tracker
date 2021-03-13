@@ -35,6 +35,51 @@ const TODO_CLC = 'todo-react-trial';
 //     }
 // };
 
+const updatePoints = async (user, todo) => {
+    const time = new Date();
+    const now = time.toISOString();
+    let points = 5 - parseInt(todo.priority) + 2;
+    let numberArr = [0, 0, 0, 0];
+    numberArr[todo.priority - 1] = 1;
+    let resp = await db
+        .collection(TODO_CLC)
+        .doc(user.uid)
+        .collection('points')
+        .where('date', '==', now)
+        .get();
+
+    if (resp.empty) {
+        db.collection(TODO_CLC)
+            .doc(user.uid)
+            .collection('points')
+            .add({
+                date: now,
+                points: points,
+                count: numberArr,
+            })
+            .then(function () {
+                console.log('Added points: ', points);
+            });
+    } else {
+        resp.forEach((document) => {
+            const newPoints = parseInt(document.data().points) + points;
+            let countArray = document.data().count;
+            console.log(countArray);
+            countArray[todo.priority - 1] += 1;
+            document.ref.update({
+                date: now,
+                points: newPoints,
+                count: countArray,
+            });
+            // db.collection(TODO_CLC)
+            //     .doc(user.uid)
+            //     .collection('points')
+            //     .doc(document.id)
+            //     .update({});
+        });
+    }
+};
+
 const signOut = () => {
     firebase
         .auth()
@@ -125,4 +170,12 @@ const fetchTodosDB = async (user) => {
     return todos;
 };
 
-export { provider, addTodoDB, markTodoDB, deleteTodoDB, signOut, fetchTodosDB };
+export {
+    provider,
+    addTodoDB,
+    markTodoDB,
+    deleteTodoDB,
+    signOut,
+    fetchTodosDB,
+    updatePoints,
+};

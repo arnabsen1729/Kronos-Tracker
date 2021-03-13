@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
+import ReactModal from 'react-modal';
 import calendarURLGen from '../../Utils/calendar';
+import Countdown from '../Countdown/Countdown';
 
 import {
     faPlusCircle,
@@ -29,7 +30,14 @@ const getItemStyle = (isDragging, draggableStyle) => ({
     ...draggableStyle,
 });
 
-function Quote({ quote, index, markTodoDone, bgColor, deleteTodo }) {
+function Quote({
+    quote,
+    index,
+    markTodoDone,
+    bgColor,
+    deleteTodo,
+    setTimerValues,
+}) {
     return (
         <Draggable draggableId={quote.id} index={index}>
             {(provided, snapshot) => (
@@ -74,6 +82,9 @@ function Quote({ quote, index, markTodoDone, bgColor, deleteTodo }) {
                             </a>
                             <div
                                 className={`text-${bgColor}-400 cursor-pointer hover:text-gray-300`}
+                                onClick={() => {
+                                    setTimerValues(quote);
+                                }}
                             >
                                 <FontAwesomeIcon
                                     icon={faPlayCircle}
@@ -101,6 +112,7 @@ const TodoList = React.memo(function QuoteList({
     bgColor,
     markTodoDone,
     deleteTodo,
+    setTimerValues,
 }) {
     return quotes.map((quote, index) => (
         <Quote
@@ -110,6 +122,7 @@ const TodoList = React.memo(function QuoteList({
             markTodoDone={markTodoDone}
             deleteTodo={deleteTodo}
             bgColor={bgColor}
+            setTimerValues={setTimerValues}
         />
     ));
 });
@@ -124,6 +137,8 @@ function TodoCard({
 }) {
     let [todosItems, setTodoItems] = useState(() => []);
     let [showModal, setShowModal] = useState(false);
+    // let [showTimer, setShowTimer] = useState(false);
+    let [timerState, setTimerState] = useState({});
 
     const bgColorClass = () => {
         return `bg-${bgColor}-200`;
@@ -177,6 +192,34 @@ function TodoCard({
         );
     };
 
+    const giveUpFn = () => {
+        setTimerState(() => {
+            return {
+                showTimer: false,
+            };
+        });
+    };
+
+    const completeFn = (todo) => {
+        markTodoDone(todo);
+        setTimerState(() => {
+            return {
+                showTimer: false,
+            };
+        });
+    };
+
+    const setTimerValues = (todo) => {
+        setTimerState(() => {
+            return {
+                todo: todo,
+                showTimer: true,
+                giveUpFn: giveUpFn,
+                completeFn: completeFn,
+            };
+        });
+    };
+
     const addTodoItem = (content, priority, duration, schedule, isSchedule) => {
         const newId = (todosItems.length + 1).toString();
         if (!isSchedule) {
@@ -228,6 +271,7 @@ function TodoCard({
                                         markTodoDone={markTodoDone}
                                         deleteTodo={deleteTodo}
                                         bgColor={bgColor}
+                                        setTimerValues={setTimerValues}
                                     />
                                     {provided.placeholder}
                                 </div>
@@ -243,6 +287,19 @@ function TodoCard({
             >
                 {element}
             </button>
+            <div>
+                <ReactModal
+                    ariaHideApp={false}
+                    isOpen={timerState.showTimer}
+                    contentLabel="Minimal Modal Example"
+                >
+                    <Countdown
+                        todo={timerState.todo}
+                        giveUpFn={timerState.giveUpFn}
+                        completeFn={timerState.completeFn}
+                    />
+                </ReactModal>
+            </div>
         </div>
     );
 

@@ -1,32 +1,32 @@
-
 import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import './Countdown.css';
-import { faCheckCircle, faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
+import {
+    faCheckCircle,
+    faExclamationCircle,
+} from '@fortawesome/free-solid-svg-icons';
 //import video from './video.mp4';
 
-function Countdown() {
-
-
+function Countdown({ todo, giveUpFn, completeFn }) {
     const FULL_DASH_ARRAY = 283;
     const WARNING_THRESHOLD = 10;
     const ALERT_THRESHOLD = 5;
 
     const COLOR_CODES = {
         info: {
-            color: "green"
+            color: 'green',
         },
         warning: {
-            color: "orange",
-            threshold: WARNING_THRESHOLD
+            color: 'orange',
+            threshold: WARNING_THRESHOLD,
         },
         alert: {
-            color: "red",
-            threshold: ALERT_THRESHOLD
-        }
+            color: 'red',
+            threshold: ALERT_THRESHOLD,
+        },
     };
-    const TIME_LIMIT = 20;
+    let TIME_LIMIT = 20;
     let timePassed = 0;
     let timeLeft = TIME_LIMIT;
     let timerInterval = null;
@@ -36,9 +36,11 @@ function Countdown() {
         timerInterval = setInterval(() => {
             timePassed = timePassed += 1;
             timeLeft = TIME_LIMIT - timePassed;
-            document.getElementById("base-timer-label").innerHTML = formatTime(
-                timeLeft
-            );
+            if (document.getElementById('base-timer-label')) {
+                document.getElementById(
+                    'base-timer-label'
+                ).innerHTML = formatTime(timeLeft);
+            }
             setCircleDasharray();
             setRemainingPathColor(timeLeft);
 
@@ -49,8 +51,11 @@ function Countdown() {
     }
 
     useEffect(() => {
-        startTimer();
-    }, [])
+        if (todo && todo.duration !== undefined) {
+            TIME_LIMIT = todo.duration;
+            startTimer();
+        }
+    }, [todo]);
 
     function onTimesUp() {
         clearInterval(timerInterval);
@@ -58,9 +63,11 @@ function Countdown() {
 
     function giveUp() {
         onTimesUp();
+        giveUpFn();
     }
     function done() {
         onTimesUp();
+        completeFn(todo);
     }
 
     function formatTime(time) {
@@ -78,17 +85,17 @@ function Countdown() {
         const { alert, warning, info } = COLOR_CODES;
         if (timeLeft <= alert.threshold) {
             document
-                .getElementById("base-timer-path-remaining")
+                .getElementById('base-timer-path-remaining')
                 .classList.remove(warning.color);
             document
-                .getElementById("base-timer-path-remaining")
+                .getElementById('base-timer-path-remaining')
                 .classList.add(alert.color);
         } else if (timeLeft <= warning.threshold) {
             document
-                .getElementById("base-timer-path-remaining")
+                .getElementById('base-timer-path-remaining')
                 .classList.remove(info.color);
             document
-                .getElementById("base-timer-path-remaining")
+                .getElementById('base-timer-path-remaining')
                 .classList.add(warning.color);
         }
     }
@@ -103,26 +110,38 @@ function Countdown() {
             calculateTimeFraction() * FULL_DASH_ARRAY
         ).toFixed(0)} 283`;
         document
-            .getElementById("base-timer-path-remaining")
-            .setAttribute("stroke-dasharray", circleDasharray);
+            .getElementById('base-timer-path-remaining')
+            .setAttribute('strokeDasharray', circleDasharray);
     }
 
-
     return (
-
         <div className="countdown-wrap h-screen">
             {/* <video loop autoPlay style={{ position: "absolute", height: "100%", width: "100%", objectFit: "cover" }}>
                 <source src={process.env.PUBLIC_URL + "/assets/video.mp4"} type="video/mp4" />
             </video> */}
-            <audio loop autoplay><source src={process.env.PUBLIC_URL + "/assets/rain.mp3"} type="audio/mp3" /></audio>
+            <audio loop autoplay>
+                <source
+                    src={process.env.PUBLIC_URL + '/assets/rain.mp3'}
+                    type="audio/mp3"
+                />
+            </audio>
             <div id="app" className="countdown-app border border-red-700">
-                <div class="base-timer ">
-                    <svg class="base-timer__svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                        <g class="base-timer__circle">
-                            <circle class="base-timer__path-elapsed" cx="50" cy="50" r="45"></circle>
+                <div className="base-timer ">
+                    <svg
+                        className="base-timer__svg"
+                        viewBox="0 0 100 100"
+                        xmlns="http://www.w3.org/2000/svg"
+                    >
+                        <g className="base-timer__circle">
+                            <circle
+                                className="base-timer__path-elapsed"
+                                cx="50"
+                                cy="50"
+                                r="45"
+                            ></circle>
                             <path
                                 id="base-timer-path-remaining"
-                                stroke-dasharray="283"
+                                strokeDasharray="283"
                                 class={`base-timer__path-remaining ${remainingPathColor}`}
                                 d="
                                 M 50, 50
@@ -132,15 +151,37 @@ function Countdown() {
                             ></path>
                         </g>
                     </svg>
-                    <span id="base-timer-label" class="base-timer__label">{formatTime(timeLeft)}</span>
+                    <span id="base-timer-label" className="base-timer__label">
+                        {formatTime(timeLeft)}
+                    </span>
                 </div>
             </div>
             <div className="countdown-button-wrap">
-                <div onClick={done} className="countdown-button hover:bg-gray-500 cursor-pointer"><FontAwesomeIcon icon={faCheckCircle} size="2x" className="mr-2" />Done</div>
-                <div onClick={giveUp} className="countdown-button hover:bg-gray-500 cursor-pointer"><FontAwesomeIcon icon={faExclamationCircle} size="2x" className="mr-2" /> Give Up</div>
+                <div
+                    onClick={done}
+                    className="countdown-button hover:bg-gray-500 cursor-pointer"
+                >
+                    <FontAwesomeIcon
+                        icon={faCheckCircle}
+                        size="2x"
+                        className="mr-2"
+                    />
+                    Done
+                </div>
+                <div
+                    onClick={giveUp}
+                    className="countdown-button hover:bg-gray-500 cursor-pointer"
+                >
+                    <FontAwesomeIcon
+                        icon={faExclamationCircle}
+                        size="2x"
+                        className="mr-2"
+                    />{' '}
+                    Give Up
+                </div>
             </div>
         </div>
-    )
+    );
 }
 
-export default Countdown
+export default Countdown;

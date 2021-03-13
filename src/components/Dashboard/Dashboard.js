@@ -4,7 +4,6 @@ import TodoCard from '../TodoCard/TodoCard';
 import Sidebar from '../Sidebar/Sidebar';
 
 function Dashboard({ user, isAuthorized }) {
-    const [showTimer, setShowTimer] = useState(false);
     let [allTodos, setAllTodos] = useState([]);
     let headingClassName = (color) => {
         return `text-3xl font-bold text-${color}-700`;
@@ -94,7 +93,7 @@ function Dashboard({ user, isAuthorized }) {
         </>
     );
 
-    return <>{showTimer ? <div>Timer</div> : dashboardItems}</>;
+    return <>{dashboardItems}</>;
 }
 
 export default Dashboard;

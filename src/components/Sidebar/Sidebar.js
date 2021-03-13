@@ -8,7 +8,7 @@ import {
     faChartPie,
     faUserCircle,
 } from '@fortawesome/free-solid-svg-icons';
-function Sidebar() {
+function Sidebar({ showChartFn }) {
     return (
         <div className="h-screen z-30 fixed inset-y-0 left-0 w-14">
             <div className="h-screen w-14 hidden md:flex items-center">
@@ -17,7 +17,10 @@ function Sidebar() {
                         <FontAwesomeIcon icon={faUserCircle} size="2x" />
                     </div>
 
-                    <div className="px-2 py-6 cursor-pointer font-bold text-gray-800 hover:bg-green-400 hover:text-white transform hover:translate-x-1 transition duration-300">
+                    <div
+                        className="px-2 py-6 cursor-pointer font-bold text-gray-800 hover:bg-green-400 hover:text-white transform hover:translate-x-1 transition duration-300"
+                        onClick={showChartFn}
+                    >
                         <FontAwesomeIcon icon={faChartPie} size="2x" />
                     </div>
                     <div

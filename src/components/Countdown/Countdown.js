@@ -26,16 +26,18 @@ function Countdown({ todo, giveUpFn, completeFn }) {
             threshold: ALERT_THRESHOLD,
         },
     };
-    let TIME_LIMIT = 20;
+    let TIME_LIMIT = null;
     let timePassed = 0;
-    let timeLeft = TIME_LIMIT;
+    let timeLeft = null;
     let timerInterval = null;
     let remainingPathColor = COLOR_CODES.info.color;
 
-    function startTimer() {
+    async function startTimer(duration) {
+        //console.log("start timer called");
+        TIME_LIMIT = duration;
         timerInterval = setInterval(() => {
             timePassed = timePassed += 1;
-            timeLeft = TIME_LIMIT - timePassed;
+            timeLeft = duration - timePassed;
             if (document.getElementById('base-timer-label')) {
                 document.getElementById(
                     'base-timer-label'
@@ -48,12 +50,12 @@ function Countdown({ todo, giveUpFn, completeFn }) {
                 onTimesUp();
             }
         }, 1000);
+        console.log(timerInterval);
     }
 
     useEffect(() => {
         if (todo && todo.duration !== undefined) {
-            TIME_LIMIT = todo.duration;
-            startTimer();
+            startTimer(todo.duration * 60);
         }
     }, [todo]);
 

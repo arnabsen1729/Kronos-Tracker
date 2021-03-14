@@ -5,6 +5,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
     faCheckCircle,
     faExclamationCircle,
+    faPlayCircle,
+    faPauseCircle,
 } from '@fortawesome/free-solid-svg-icons';
 //import video from './video.mp4';
 
@@ -54,6 +56,7 @@ function Countdown({ todo, giveUpFn, completeFn }) {
     }
 
     let [audio, setAudio] = useState();
+    let [playing, setPlaying] = useState(false);
 
     useEffect(() => {
         if (todo && todo.duration !== undefined) {
@@ -61,19 +64,21 @@ function Countdown({ todo, giveUpFn, completeFn }) {
         }
     }, [todo]);
 
+    useEffect(() => {
+        setAudio(new Audio(process.env.PUBLIC_URL + '/assets/rain.mp3'));
+        setPlaying(false);
+    }, []);
     const play = () => {
         // this.setState({ play: true, pause: false });
+        setPlaying(() => true);
         audio.play();
     };
 
     const pause = () => {
         // this.setState({ play: false, pause: true });
+        setPlaying(() => false);
         audio.pause();
     };
-
-    useEffect(() => {
-        setAudio(new Audio(process.env.PUBLIC_URL + '/assets/rain.mp3'));
-    }, []);
 
     function onTimesUp() {
         clearInterval(timerInterval);
@@ -131,6 +136,17 @@ function Countdown({ todo, giveUpFn, completeFn }) {
             .getElementById('base-timer-path-remaining')
             .setAttribute('strokeDasharray', circleDasharray);
     }
+
+    const playButton = () => (
+        <button onClick={play}>
+            <FontAwesomeIcon size="3x" icon={faPlayCircle} />
+        </button>
+    );
+    const pauseButton = () => (
+        <button onClick={pause}>
+            <FontAwesomeIcon size="3x" icon={faPauseCircle} />
+        </button>
+    );
 
     return (
         <div className="countdown-wrap">
@@ -196,8 +212,7 @@ function Countdown({ todo, giveUpFn, completeFn }) {
                 />
             </audio> */}
             <div className="bg-white">
-                <button onClick={play}>Play</button>
-                <button onClick={pause}>Pause</button>
+                {!playing ? playButton() : pauseButton()}
             </div>
         </div>
     );

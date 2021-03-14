@@ -7,19 +7,19 @@ Maintaining todos is hard. So, we created a web app that will keep our tasks org
 ## Screenshots
 ## Todo Overview
 
-![todo-overview](./ss/1.png)
+![todo-overview](./images/dashboard.png)
 
 
 
 ### User profile
-![profile](ss/3.png)
+![profile](images/profile.png)
 
 ### Timer
-![timer](ss/4.png)
+![timer](images/timer.png)
 
 ### Charts
-![charts](ss/5.png)
-![charts](ss/6.png)
+![charts](images/graph1.png)
+![charts](images/graph2.png)
 
 
 ## Demo

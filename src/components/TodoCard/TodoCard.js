@@ -68,7 +68,9 @@ function Quote({
                                     icon={faCheckDouble}
                                     size="2x"
                                 />
-                                <span className="tooltiptext">Mark as done</span>
+                                <span className="tooltiptext">
+                                    Mark as done
+                                </span>
                             </div>
                             <a
                                 href={calendarURLGen(quote)}
@@ -79,7 +81,10 @@ function Quote({
                                 <FontAwesomeIcon
                                     icon={faCalendarCheck}
                                     size="2x"
-                                /><span className="tooltiptext">Add to calender</span>
+                                />
+                                <span className="tooltiptext">
+                                    Add to calender
+                                </span>
                             </a>
                             <div
                                 className={`text-${bgColor}-400 cursor-pointer hover:text-gray-300 tooltip`}
@@ -90,7 +95,8 @@ function Quote({
                                 <FontAwesomeIcon
                                     icon={faPlayCircle}
                                     size="2x"
-                                /><span className="tooltiptext">Start timer</span>
+                                />
+                                <span className="tooltiptext">Start timer</span>
                             </div>
                             <div
                                 className={`text-${bgColor}-400 cursor-pointer hover:text-black tooltip`}
@@ -98,7 +104,8 @@ function Quote({
                                     deleteTodo(quote);
                                 }}
                             >
-                                <FontAwesomeIcon icon={faTrash} size="2x" /><span className="tooltiptext">Delete</span>
+                                <FontAwesomeIcon icon={faTrash} size="2x" />
+                                <span className="tooltiptext">Delete</span>
                             </div>
                         </div>
                     </div>
@@ -153,7 +160,7 @@ function TodoCard({
 
     const element = (
         <div
-            className={`rounded-full border border-${bgColor}-700 shadow-md hover:shadow-lg bg-white text-${bgColor}-700 transform hover:scale-125`}
+            className={`rounded-full border border-${bgColor}-700 shadow-md hover:shadow-lg bg-white text-${bgColor}-700 transform transition duration-300 ease-in-out hover:scale-125`}
         >
             <FontAwesomeIcon icon={faPlusCircle} size="3x" />
         </div>

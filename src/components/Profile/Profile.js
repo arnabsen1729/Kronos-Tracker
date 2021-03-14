@@ -21,7 +21,7 @@ const getMostProductiveDay = (points) => {
     });
 
     if (ptArr.length > 0) return ptArr[0];
-    else return 0;
+    else return [0, 'N/A'];
 };
 
 const getLongestStreak = (points) => {
@@ -86,7 +86,7 @@ function Profile({ user }) {
     const getUserDetails = (userData) => {
         if (userData.isAnonymous) {
             return {
-                name: 'Gues',
+                name: 'Guest',
                 email: 'guest@address.com',
                 img:
                     'https://raw.githubusercontent.com/arnabsen1729/static-content/master/tidy/default-avatar.png',
@@ -102,7 +102,7 @@ function Profile({ user }) {
     let [points, setPoints] = useState([]);
     let [allTodos, setAllTodos] = useState([]);
     let [userDetails, setUserDetails] = useState({
-        name: 'Gues',
+        name: 'Guest',
         email: 'guest@address.com',
         img:
             'https://raw.githubusercontent.com/arnabsen1729/static-content/master/tidy/default-avatar.png',

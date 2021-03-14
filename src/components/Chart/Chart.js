@@ -23,11 +23,11 @@ function Chart({ user }) {
             <div>
                 <LineChart points={points} />
             </div>
-            <div className="flex justify-around">
+            <div className="flex flex-col md:flex-row justify-around items-center pt-16">
                 <div>
                     <PieChart points={points} />
                 </div>
-                <div>
+                <div className="md:pt-0 pt-8 pb-8">
                     <BarChart points={points} />
                 </div>
             </div>

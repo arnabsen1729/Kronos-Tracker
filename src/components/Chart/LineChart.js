@@ -3,7 +3,7 @@ import { Line } from 'react-chartjs-2';
 
 const getLabelDates = () => {
     const time = new Date();
-    const size = 4;
+    const size = 10;
     time.setDate(time.getDate() - size);
     let now = time.toISOString().split('T')[0];
     let j = 0;
@@ -21,7 +21,7 @@ const getLabelDates = () => {
 
 const getISODates = () => {
     const time = new Date();
-    const size = 4;
+    const size = 10;
     time.setDate(time.getDate() - size);
     let now = time.toISOString().split('T')[0];
     let j = 0;
@@ -52,20 +52,10 @@ function LineChart({ points }) {
                 labels: getLabelDates(),
                 datasets: [
                     {
-                        label: '# of votes',
+                        label: 'Daily Performance',
                         data: getDateScore(points),
-                        backgroundColor: [
-                            'rgba(255, 99, 132, 1)',
-                            'rgba(54, 162, 235, 1)',
-                            'rgba(255, 206, 86, 1)',
-                            'rgba(75, 192, 192, 1)',
-                        ],
-                        borderColor: [
-                            'rgba(255, 99, 132, 1)',
-                            'rgba(54, 162, 235, 1)',
-                            'rgba(255, 206, 86, 1)',
-                            'rgba(75, 192, 192, 1)',
-                        ],
+                        backgroundColor: ['rgba(75, 0, 130,0.6)'],
+
                         borderWidth: 1,
                     },
                 ],

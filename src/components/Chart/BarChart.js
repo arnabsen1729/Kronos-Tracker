@@ -1,4 +1,5 @@
-import React from 'react';
+import { red } from '@material-ui/core/colors';
+import React, { useState, useEffect } from 'react';
 import { Bar } from 'react-chartjs-2';
 
 const getPriorityScore = (points) => {
@@ -16,34 +17,51 @@ const getPriorityScore = (points) => {
 };
 
 function BarChart({ points }) {
+    let [screenWidth, setScreenWidth] = useState(window.innerWidth);
+    useEffect(() => {
+        function updateWidth() {
+            setScreenWidth(window.innerWidth);
+        }
+        window.addEventListener('resize', updateWidth);
+    });
+
     return (
         <Bar
             data={{
-                labels: ['Red', 'Blue', 'Yellow', 'Green'],
+                labels: ['1', '2', '3', '4'],
                 datasets: [
                     {
-                        label: '# of votes',
+                        label: 'Priority score',
                         data: getPriorityScore(points),
                         backgroundColor: [
                             'rgba(255, 99, 132, 1)',
                             'rgba(54, 162, 235, 1)',
-                            'rgba(255, 206, 86, 1)',
+
                             'rgba(75, 192, 192, 1)',
+                            'rgba(255, 206, 86, 1)',
                         ],
                         borderColor: [
                             'rgba(255, 99, 132, 1)',
                             'rgba(54, 162, 235, 1)',
-                            'rgba(255, 206, 86, 1)',
+
                             'rgba(75, 192, 192, 1)',
+                            'rgba(255, 206, 86, 1)',
                         ],
-                        borderWidth: 1,
+                        borderWidth: 2,
+                        hoverBorderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(255, 206, 86, 1)',
+                        ],
                     },
                 ],
             }}
-            height={400}
-            width={600}
+            height={screenWidth <= 768 ? 150 : 400}
+            width={screenWidth <= 768 ? 225 : 600}
             options={{
-                maintainAspectRatio: false,
+                maintainAspectRatio: true,
                 scales: {
                     yAxes: [
                         {
@@ -55,7 +73,7 @@ function BarChart({ points }) {
                 },
                 legend: {
                     labels: {
-                        fontSize: 25,
+                        fontSize: 15,
                     },
                 },
             }}

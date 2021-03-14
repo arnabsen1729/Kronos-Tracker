@@ -53,11 +53,27 @@ function Countdown({ todo, giveUpFn, completeFn }) {
         console.log(timerInterval);
     }
 
+    let [audio, setAudio] = useState();
+
     useEffect(() => {
         if (todo && todo.duration !== undefined) {
             startTimer(todo.duration * 60);
         }
     }, [todo]);
+
+    const play = () => {
+        // this.setState({ play: true, pause: false });
+        audio.play();
+    };
+
+    const pause = () => {
+        // this.setState({ play: false, pause: true });
+        audio.pause();
+    };
+
+    useEffect(() => {
+        setAudio(new Audio(process.env.PUBLIC_URL + '/assets/rain.mp3'));
+    }, []);
 
     function onTimesUp() {
         clearInterval(timerInterval);
@@ -118,7 +134,6 @@ function Countdown({ todo, giveUpFn, completeFn }) {
 
     return (
         <div className="countdown-wrap">
-
             <div id="app" className="countdown-app border border-red-700">
                 <div className="base-timer ">
                     <svg
@@ -151,7 +166,6 @@ function Countdown({ todo, giveUpFn, completeFn }) {
                 </div>
             </div>
             <div className="countdown-button-wrap w-80 pt-8 flex justify-around">
-
                 <div
                     onClick={giveUp}
                     className="countdown-button px-4 py-4 hover:bg-red-500 cursor-pointer transform hover:scale-110"
@@ -174,6 +188,16 @@ function Countdown({ todo, giveUpFn, completeFn }) {
                     />
                     Done
                 </div>
+            </div>
+            {/* <audio loop controls>
+                <source
+                    src={process.env.PUBLIC_URL + '/assets/rain.mp3'}
+                    type="audio/mp3"
+                />
+            </audio> */}
+            <div className="bg-white">
+                <button onClick={play}>Play</button>
+                <button onClick={pause}>Pause</button>
             </div>
         </div>
     );

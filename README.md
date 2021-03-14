@@ -4,6 +4,28 @@
 
 Maintaining todos is hard. So, we created a web app that will keep our tasks organized, group tasks on the basis of their priority and urgency. Display progress reports and other statistics, that will keep us boosted and improve our productivity. Also, has a timer with a white noise that will help us concentrate on the task we are currently doing.
 
+## Screenshots
+## Todo Overview
+
+![todo-overview](./ss/1.png)
+
+
+
+### User profile
+![profile](ss/3.png)
+
+### Timer
+![timer](ss/4.png)
+
+### Charts
+![charts](ss/5.png)
+![charts](ss/6.png)
+
+
+## Demo
+
+[![Kronos Demo - MLH tidy the hack up 2021](https://cdn.discordapp.com/attachments/722144870218858548/820571605733998602/KRONOS_1.png)](https://youtu.be/MmL0_774V1o "kronos-tracker Demo - MLH tidy-the-hack-up 2021")
+
 ## Inspiration
 
 We have a lot of tasks on our hands which are difficult to be remembered. Often we miss out on a task or two. At the end of the day,  we realize that the most important ones get missed out because it was lost among the other unimportant todos. This is due to a lack of organization in the traditional todo system.
@@ -62,3 +84,19 @@ We hope to expand the idea of kronos tracker in the following ways:-
 1.  User can login using other social handles or github.
 2.  We can maintain a leader board of various users.
 3.  Extend the user dashboard from where the user can share their success to social media.
+
+
+## Team: kronos-tracker
+
+<table>
+  <tr>
+    <td align="center">
+    <a href="https://arnabsen.rocks/">
+    <img src="https://avatars1.githubusercontent.com/u/51032928?v=4" width="100px;" alt=""/>
+    <br />
+    <sub>
+    <b>Arnab Sen</b></sub></a><br /><a href="https://github.com/arnabsen1729/WeCare/commits?author=arnabsen1729" title="Documentation">📖</a><td align="center"><a href="https://github.com/Rajdeep-G"><img src="https://avatars.githubusercontent.com/u/58541505?v=4" width="100px;" alt=""/><br /><sub><b>Rajdeep Ghosh</b></sub></a><br /><a href="https://github.com/arnabsen1729/WeCare/commits?author=Rajdeep-G" title="Documentation">📖</a></td></td>
+    <td align="center"><a href="https://github.com/berakrishnendu36"><img src="https://avatars.githubusercontent.com/u/51166937?v=4" width="100px;" alt=""/><br /><sub><b>Krishnendu Bera</b></sub></a><br /><a href="https://github.com/arnabsen1729/WeCare/commits?author=berakrishnendu36" title="Documentation">📖</a></td>
+    
+  </tr>
+</table>

@@ -3,17 +3,86 @@ import {
     faMedal,
     faFlagCheckered,
     faClipboardList,
+    faStar,
+    faRunning,
+    faLightbulb,
 } from '@fortawesome/free-solid-svg-icons';
 import React, { useEffect, useState } from 'react';
-import { fetchPoints } from '../../db/db';
+import { fetchPoints, fetchTodosDB } from '../../db/db';
 
 const getTotalPoints = (points) => {
     return points.reduce((acc, pt) => acc + pt.points, 0);
 };
 
-const getTotalMarkedTodos = (allTodos) => {};
+const getMostProductiveDay = (points) => {
+    const ptArr = points.map((pt) => [pt.points, pt.date]);
+    ptArr.sort(function (a, b) {
+        return b[0] - a[0];
+    });
 
-function Profile({ user, allTodos }) {
+    if (ptArr.length > 0) return ptArr[0];
+    else return 0;
+};
+
+const getLongestStreak = (points) => {
+    const dateArr = points.map((pt) => pt.date);
+    dateArr.sort();
+    let maxCount = 0;
+    let currCount = 0;
+    if (dateArr.length === 0) {
+        return 0;
+    } else if (dateArr.length === 1) {
+        return 1;
+    } else {
+        for (let index = 1; index < dateArr.length; index += 1) {
+            let now = new Date(dateArr[index]).getTime();
+            let prev = new Date(dateArr[index - 1]).getTime();
+            if (now - prev <= 24 * 60 * 60 * 1000) {
+                currCount += 1;
+            } else {
+                currCount = 0;
+            }
+
+            maxCount = Math.max(maxCount, currCount);
+        }
+
+        return maxCount;
+    }
+};
+
+const getCurrentStreak = (points) => {
+    const dateArr = points.map((pt) => pt.date);
+    dateArr.sort();
+    dateArr.reverse();
+    let currCount = 0;
+    if (dateArr.length === 0) {
+        return 0;
+    } else if (dateArr.length === 1) {
+        return 1;
+    } else {
+        for (let index = 1; index < dateArr.length; index += 1) {
+            let now = new Date(dateArr[index]).getTime();
+            let prev = new Date(dateArr[index - 1]).getTime();
+            if (prev - now <= 24 * 60 * 60 * 1000) {
+                currCount += 1;
+            } else {
+                break;
+            }
+        }
+
+        return currCount;
+    }
+};
+
+const getCompletedTodos = (allTodos) => {
+    return allTodos.filter((todo) => todo.completed).length;
+};
+
+const getLeftTodos = (allTodos) => {
+    return allTodos.filter((todo) => !todo.completed).length;
+};
+
+function Profile({ user }) {
     const getUserDetails = (userData) => {
         if (userData.isAnonymous) {
             return {
@@ -31,6 +100,7 @@ function Profile({ user, allTodos }) {
         }
     };
     let [points, setPoints] = useState([]);
+    let [allTodos, setAllTodos] = useState([]);
     let [userDetails, setUserDetails] = useState({
         name: 'Gues',
         email: 'guest@address.com',
@@ -42,6 +112,9 @@ function Profile({ user, allTodos }) {
         console.log('Chart mounted...');
         fetchPoints(user).then((ptArr) => {
             setPoints(ptArr);
+        });
+        fetchTodosDB(user).then((todoArr) => {
+            setAllTodos(todoArr);
         });
     }, []);
 
@@ -95,18 +168,18 @@ function Profile({ user, allTodos }) {
                         <div class="border-2 border-gray-200 px-4 py-6 rounded-lg">
                             <FontAwesomeIcon icon={faFlagCheckered} size="2x" />
                             <h2 class="title-font font-medium text-3xl text-gray-900">
-                                1.3K
+                                {getCompletedTodos(allTodos)}
                             </h2>
-                            <p class="leading-relaxed">Points</p>
+                            <p class="leading-relaxed">Completed Todos</p>
                         </div>
                     </div>
                     <div class="w-1/3 px-2">
                         <div class="border-2 border-gray-200 px-4 py-6 rounded-lg">
                             <FontAwesomeIcon icon={faClipboardList} size="2x" />
                             <h2 class="title-font font-medium text-3xl text-gray-900">
-                                1.3K
+                                {getLeftTodos(allTodos)}
                             </h2>
-                            <p class="leading-relaxed">Points</p>
+                            <p class="leading-relaxed">Left Todos</p>
                         </div>
                     </div>
                 </div>
@@ -121,12 +194,12 @@ function Profile({ user, allTodos }) {
                                     size="2x"
                                     className="my-auto"
                                 />
-                                <div>
+                                <div class="text-center">
                                     <p class="text-sm font-medium text-black-600 ">
-                                        Most productive day
+                                        Most productive
                                     </p>
                                     <p class="text-2xl font-bold text-gray-700">
-                                        10/10/10
+                                        {getMostProductiveDay(points)[1]}
                                     </p>
                                 </div>
                             </div>
@@ -136,16 +209,16 @@ function Profile({ user, allTodos }) {
                         <div class="border-l-8 border-blue-600 bg-blue-200 px-4 py-4">
                             <div class="flex justify-around">
                                 <FontAwesomeIcon
-                                    icon={faMedal}
+                                    icon={faLightbulb}
                                     size="2x"
                                     className="my-auto"
                                 />
-                                <div>
+                                <div class="text-center">
                                     <p class="text-sm font-medium text-black-600 ">
-                                        Most points
+                                        Max points
                                     </p>
                                     <p class="text-2xl font-bold text-gray-700">
-                                        10/10/10
+                                        {getMostProductiveDay(points)[0]}
                                     </p>
                                 </div>
                             </div>
@@ -155,16 +228,16 @@ function Profile({ user, allTodos }) {
                         <div class="border-l-8 border-yellow-600 bg-yellow-200 px-4 py-4">
                             <div class="flex justify-around">
                                 <FontAwesomeIcon
-                                    icon={faMedal}
+                                    icon={faStar}
                                     size="2x"
                                     className="my-auto"
                                 />
-                                <div>
+                                <div class="text-center">
                                     <p class="text-sm font-medium text-black-600 ">
                                         Longest Streak
                                     </p>
                                     <p class="text-2xl font-bold text-gray-700">
-                                        10/10/10
+                                        {getLongestStreak(points)}
                                     </p>
                                 </div>
                             </div>
@@ -174,16 +247,16 @@ function Profile({ user, allTodos }) {
                         <div class="border-l-8 border-green-600 bg-green-200 px-4 py-4">
                             <div class="flex justify-around">
                                 <FontAwesomeIcon
-                                    icon={faMedal}
+                                    icon={faRunning}
                                     size="2x"
                                     className="my-auto"
                                 />
-                                <div>
+                                <div class="text-center">
                                     <p class="text-sm font-medium text-black-600 ">
                                         Current Streak
                                     </p>
                                     <p class="text-2xl font-bold text-gray-700">
-                                        10/10/10
+                                        {getCurrentStreak(points)}
                                     </p>
                                 </div>
                             </div>

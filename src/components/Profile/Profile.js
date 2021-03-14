@@ -117,7 +117,6 @@ function Profile({ user }) {
         });
     }, []);
 
-
     useEffect(() => {
         setUserDetails(getUserDetails(user));
     }, [user]);
@@ -127,11 +126,11 @@ function Profile({ user }) {
     }, [allTodos]);
 
     return (
-        <div className="border rounded-lg bg-white m-auto border-gray-400 mt-36 w-2/3 h-auto grid grid-cols-3">
+        <div className="border rounded-lg bg-white m-auto border-gray-400 mt-3 lg:mt-36 w-full lg:w-2/3 h-auto grid grid-cols-1 lg:grid-cols-3">
             <div className="mt-12 col-span-2">
                 <div className="flex justify-around">
                     <div className="">
-                        <div className="w-48 h-48 relative mb-4">
+                        <div className="md:w-48 md:h-48 relative mb-4">
                             <div className="group w-full h-full rounded-full overflow-hidden shadow-inner text-center bg-purple table cursor-pointer">
                                 <img
                                     src={userDetails.img}

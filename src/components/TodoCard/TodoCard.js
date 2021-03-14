@@ -147,23 +147,11 @@ function TodoCard({
     let [showModal, setShowModal] = useState(false);
     let [timerState, setTimerState] = useState({});
 
-    const bgColorClass = () => {
-        return `bg-${bgColor}-200`;
-    };
-
     useEffect(() => {
         setTodoItems(() =>
             allTodos.filter((t) => t.priority === priority && !t.completed)
         );
     }, [allTodos]);
-
-    const element = (
-        <div
-            className={`rounded-full border border-${bgColor}-700 shadow-md hover:shadow-lg bg-white text-${bgColor}-700 transform transition duration-300 ease-in-out hover:scale-125`}
-        >
-            <FontAwesomeIcon icon={faPlusCircle} size="3x" />
-        </div>
-    );
 
     function onDragEnd(result) {
         console.log(result);
@@ -259,7 +247,7 @@ function TodoCard({
     const todoListItems = (
         <div className="h-full overflow-hidden relative">
             <div
-                className={`${bgColorClass()} h-full overflow-y-scroll relative rounded-lg`}
+                className={`bg-${bgColor}-200 h-full overflow-y-scroll relative rounded-lg`}
             >
                 {showModal ? (
                     <Modal {...{ priority, closeModalHandler, addTodoItem }} />
@@ -291,7 +279,11 @@ function TodoCard({
                 type="button"
                 onClick={() => setShowModal(true)}
             >
-                {element}
+                <div
+                    className={`rounded-full border border-${bgColor}-700 shadow-md hover:shadow-lg bg-white text-${bgColor}-700 transform transition duration-300 ease-in-out hover:scale-125`}
+                >
+                    <FontAwesomeIcon icon={faPlusCircle} size="3x" />
+                </div>
             </button>
             <div>
                 <ReactModal

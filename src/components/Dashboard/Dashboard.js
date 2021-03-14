@@ -60,7 +60,7 @@ function Dashboard({ user, isAuthorized }) {
             <div className="pl-0 md:pl-16 md:h-screen w-full md:pt-5">
                 <div className="md:h-1/2 md:flex md:flex-row w-full">
                     <div className="h-96 md:h-full px-3 w-screen md:w-1/2 flex flex-col">
-                        <h1 className={headingClassName('red')}>
+                        <h1 className="text-3xl font-bold text-red-700">
                             High Importance + Urgent
                         </h1>
                         <TodoCard
@@ -73,7 +73,7 @@ function Dashboard({ user, isAuthorized }) {
                         />
                     </div>
                     <div className="h-96 md:h-full px-3 w-screen md:w-1/2 flex flex-col">
-                        <h1 className={headingClassName('blue')}>
+                        <h1 className="text-3xl font-bold text-blue-700">
                             High Importance + Not Urgent
                         </h1>
                         <TodoCard
@@ -88,7 +88,7 @@ function Dashboard({ user, isAuthorized }) {
                 </div>
                 <div className="md:h-1/2 md:flex md:flex-row w-full pb-2 mb-16 md:mb-0">
                     <div className="h-96 md:h-full px-3 w-screen md:w-1/2 flex flex-col">
-                        <h1 className={headingClassName('green')}>
+                        <h1 className="text-3xl font-bold text-green-700">
                             Low Importance + Urgent
                         </h1>
                         <TodoCard
@@ -101,7 +101,7 @@ function Dashboard({ user, isAuthorized }) {
                         />
                     </div>
                     <div className="h-96 md:h-full px-3 w-screen md:w-1/2 flex flex-col">
-                        <h1 className={headingClassName('yellow')}>
+                        <h1 className="text-3xl font-bold text-yellow-700">
                             Low Importance + Not Urgent
                         </h1>
                         <TodoCard
@@ -126,15 +126,6 @@ function Dashboard({ user, isAuthorized }) {
                     </ReactModal>
                 </div>
                 <div>
-                    {/* <ReactModal
-                        onRequestClose={() => setShowProfile(false)}
-                        shouldCloseOnEsc={true}
-                        ariaHideApp={false}
-                        isOpen={showProfile}
-                        contentLabel="Minimal Modal Example"
-                    >
-                        <Profile user={user} />
-                    </ReactModal> */}
                     <Modal
                         open={showProfile}
                         onClose={() => setShowProfile(false)}

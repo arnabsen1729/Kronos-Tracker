@@ -8,12 +8,16 @@ import {
     faChartPie,
     faUserCircle,
 } from '@fortawesome/free-solid-svg-icons';
-function Sidebar({ showChartFn }) {
+
+function Sidebar({ showChartFn, showProfileFn }) {
     return (
         <div className="h-screen z-30 fixed inset-y-0 left-0 w-14">
             <div className="h-screen w-14 hidden md:flex items-center">
                 <div className=" w-full rounded-3xl flex flex-col rounded-l-none bg-gray-300">
-                    <div className="px-2 py-6 cursor-pointer font-bold rounded-3xl rounded-l-none rounded-b-none text-gray-800 hover:bg-yellow-400 hover:text-white transform hover:translate-x-1 transition duration-300">
+                    <div
+                        className="px-2 py-6 cursor-pointer font-bold rounded-3xl rounded-l-none rounded-b-none text-gray-800 hover:bg-yellow-400 hover:text-white transform hover:translate-x-1 transition duration-300"
+                        onClick={showProfileFn}
+                    >
                         <FontAwesomeIcon icon={faUserCircle} size="2x" />
                     </div>
 
@@ -33,7 +37,10 @@ function Sidebar({ showChartFn }) {
             </div>
             <div className="w-screen bg-gray-400 rounded-3xl rounded-b-none fixed bottom-0 h-16 flex md:hidden justify-items-center items-center">
                 <div className="flex w-full justify-around">
-                    <div className="px-2 py-4 rounded-3xl rounded-b-none rounded-r-none font-bold text-gray-800 hover:bg-yellow-400 hover:text-white w-full text-center transform hover:-translate-y-1 transition duration-300">
+                    <div
+                        className="px-2 py-4 rounded-3xl rounded-b-none rounded-r-none font-bold text-gray-800 hover:bg-yellow-400 hover:text-white w-full text-center transform hover:-translate-y-1 transition duration-300"
+                        onClick={showProfileFn}
+                    >
                         <FontAwesomeIcon icon={faUserCircle} size="2x" />
                     </div>
 

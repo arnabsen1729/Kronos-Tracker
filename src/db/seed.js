@@ -24,6 +24,7 @@ const seedPoints = (uid) => {
     let numberArr = [0, 0, 0, 0];
     var j = 0;
     final = []
+    var id = 1;
     while (j < size) {
         var i;
         var point = 0;
@@ -39,13 +40,14 @@ const seedPoints = (uid) => {
                     .collection('todos')
                     .add({
                         completed: true,
-                        content: "Test " + (k + 1 + j),
+                        content: "Test " + (id),
                         duration: 30,
-                        id: "" + (k + 1 + j),
+                        id: "" + (id),
                         isSchedule: false,
                         priority: (i + 1),
                         schedule: ""
                     });
+                id += 1
             }
             const unCompleted = parseInt(Math.random() * 2);
             for (k = 0; k < unCompleted; k++) {
@@ -54,13 +56,14 @@ const seedPoints = (uid) => {
                     .collection('todos')
                     .add({
                         completed: false,
-                        content: "Test " + (k + 1 + numberArr[i]),
+                        content: "Test " + (id),
                         duration: 30,
-                        id: "" + (k + 1 + numberArr[i]),
+                        id: "" + (id),
                         isSchedule: false,
                         priority: (i + 1),
                         schedule: ""
                     });
+                id += 1
             }
         }
         db.collection(TODO_CLC)
@@ -83,4 +86,4 @@ const seedPoints = (uid) => {
     // console.log(final);
 }
 //funcGen()
-seedPoints("qstvMNkmcQXQ6S268Grr0iniQRB3");
+seedPoints("MFMSWP8gNPQkP5IFLox55mf1yiu1");

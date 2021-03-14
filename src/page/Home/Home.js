@@ -104,11 +104,11 @@ function Home() {
                 <header className="home-showcase">
                     <div className="home-content md:pt-32">
                         <img
-                            src="https://image.ibb.co/ims4Ep/logo.png"
+                            src={process.env.PUBLIC_URL + "/assets/kronos.png"}
                             className="home-logo text-center m-auto"
                             alt="Traversy Media"
                         ></img>
-                        <div className="home-title mb-2">Your ToDo Manager</div>
+                        <div className="home-title mb-4">Kronos Tracker</div>
                         <div className="flex flex-col justify-items-center">
                             <button
                                 onClick={logIn}

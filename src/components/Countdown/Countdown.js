@@ -138,7 +138,7 @@ function Countdown({ todo, giveUpFn, completeFn }) {
     }
 
     const playButton = () => (
-        <button onClick={play}>
+        <button onClick={play} className="">
             <FontAwesomeIcon size="3x" icon={faPlayCircle} />
         </button>
     );
@@ -205,13 +205,7 @@ function Countdown({ todo, giveUpFn, completeFn }) {
                     Done
                 </div>
             </div>
-            {/* <audio loop controls>
-                <source
-                    src={process.env.PUBLIC_URL + '/assets/rain.mp3'}
-                    type="audio/mp3"
-                />
-            </audio> */}
-            <div className="bg-white">
+            <div className="countdown-button mt-4 p-1">
                 {!playing ? playButton() : pauseButton()}
             </div>
         </div>

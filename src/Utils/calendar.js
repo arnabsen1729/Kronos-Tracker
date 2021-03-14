@@ -2,7 +2,6 @@ let getString = (st) => {
     return st.replace(/-/g, '').replace(/:/g, '').split('.')[0] + 'Z';
 };
 export default function calendarURLGen(quote) {
-    console.log(quote);
     let title = quote.content;
     let desc = '';
     if (quote.priority === 1) {

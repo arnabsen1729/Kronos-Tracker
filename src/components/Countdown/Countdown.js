@@ -32,11 +32,10 @@ function Countdown({ todo, giveUpFn, completeFn }) {
     let timePassed = 0;
     let timeLeft = null;
     let timerInterval = null;
-    let [timeIntervalId, setIntervalId] = useState(null)
+    let [timeIntervalId, setIntervalId] = useState(null);
     let remainingPathColor = COLOR_CODES.info.color;
 
     async function startTimer(duration) {
-        console.log("start timer called");
         TIME_LIMIT = duration;
         timerInterval = setInterval(() => {
             timePassed = timePassed += 1;
@@ -54,7 +53,6 @@ function Countdown({ todo, giveUpFn, completeFn }) {
             }
         }, 1000);
         setIntervalId(timerInterval);
-        console.log(timerInterval);
     }
 
     let [audio, setAudio] = useState();

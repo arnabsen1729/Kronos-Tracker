@@ -8,15 +8,10 @@ function Chart({ user }) {
     let [points, setPoints] = useState([]);
 
     useEffect(() => {
-        console.log('Chart mounted...');
         fetchPoints(user).then((ptArr) => {
             setPoints(ptArr);
         });
-    }, []);
-
-    useEffect(() => {
-        console.log('Points array upd', points);
-    }, [points]);
+    }, [user]);
 
     return (
         <div>

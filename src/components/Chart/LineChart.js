@@ -15,7 +15,6 @@ const getLabelDates = () => {
         final.push(timeArr[2] + '/' + timeArr[1] + '/' + timeArr[0]);
         j += 1;
     }
-    console.log(final);
     return final;
 };
 
@@ -32,7 +31,6 @@ const getISODates = () => {
         final.push(now);
         j += 1;
     }
-    console.log(final);
     return final;
 };
 

@@ -109,7 +109,6 @@ function Profile({ user }) {
     });
 
     useEffect(() => {
-        console.log('Chart mounted...');
         fetchPoints(user).then((ptArr) => {
             setPoints(ptArr);
         });
@@ -118,9 +117,6 @@ function Profile({ user }) {
         });
     }, []);
 
-    useEffect(() => {
-        console.log('Points array upd', points);
-    }, [points]);
 
     useEffect(() => {
         setUserDetails(getUserDetails(user));

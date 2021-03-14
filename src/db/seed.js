@@ -15,7 +15,6 @@ db.settings({ timestampsInSnapshots: true });
 
 const TODO_CLC = 'todo-react-trial';
 
-
 const seedPoints = (uid) => {
     const time = new Date();
     const size = 10;
@@ -23,7 +22,7 @@ const seedPoints = (uid) => {
     let now = time.toISOString().split('T')[0];
     let numberArr = [0, 0, 0, 0];
     var j = 0;
-    final = []
+    final = [];
     var id = 1;
     while (j < size) {
         var i;
@@ -32,7 +31,7 @@ const seedPoints = (uid) => {
         now = time.toISOString().split('T')[0];
         for (i = 0; i < 4; i++) {
             numberArr[i] = parseInt(Math.random() * 2);
-            point += (numberArr[i] * (6 - i));
+            point += numberArr[i] * (6 - i);
             let k;
             for (k = 0; k < numberArr[i]; k++) {
                 db.collection(TODO_CLC)
@@ -40,14 +39,14 @@ const seedPoints = (uid) => {
                     .collection('todos')
                     .add({
                         completed: true,
-                        content: "Test " + (id),
+                        content: 'Test ' + id,
                         duration: 30,
-                        id: "" + (id),
+                        id: '' + id,
                         isSchedule: false,
-                        priority: (i + 1),
-                        schedule: ""
+                        priority: i + 1,
+                        schedule: '',
                     });
-                id += 1
+                id += 1;
             }
             const unCompleted = parseInt(Math.random() * 2);
             for (k = 0; k < unCompleted; k++) {
@@ -56,34 +55,27 @@ const seedPoints = (uid) => {
                     .collection('todos')
                     .add({
                         completed: false,
-                        content: "Test " + (id),
+                        content: 'Test ' + id,
                         duration: 30,
-                        id: "" + (id),
+                        id: '' + id,
                         isSchedule: false,
-                        priority: (i + 1),
-                        schedule: ""
+                        priority: i + 1,
+                        schedule: '',
                     });
-                id += 1
+                id += 1;
             }
         }
-        db.collection(TODO_CLC)
-            .doc(uid)
-            .collection('points')
-            .add({
-                date: now,
-                points: point,
-                count: numberArr,
-            })
-            .then(function () {
-                console.log('Added point: ', point);
-                console.log('Number Array: ', numberArr);
-            });
+        db.collection(TODO_CLC).doc(uid).collection('points').add({
+            date: now,
+            points: point,
+            count: numberArr,
+        });
+
         // let timeArr = now.split('-');
         // console.log(timeArr[2] + "/" + timeArr[1] + "/" + timeArr[0]);
         // final.push(timeArr[2] + "/" + timeArr[1] + "/" + timeArr[0]);
         j += 1;
     }
-    // console.log(final);
-}
+};
 //funcGen()
-seedPoints("MFMSWP8gNPQkP5IFLox55mf1yiu1");
+seedPoints('MFMSWP8gNPQkP5IFLox55mf1yiu1');

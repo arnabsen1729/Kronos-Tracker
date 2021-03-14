@@ -152,7 +152,6 @@ function TodoCard({
     };
 
     useEffect(() => {
-        console.log('Card', allTodos);
         setTodoItems(() =>
             allTodos.filter((t) => t.priority === priority && !t.completed)
         );

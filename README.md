@@ -1,8 +1,8 @@
 <img src="https://socialify.git.ci/arnabsen1729/Kronos-Tracker/image?font=KoHo&language=1&owner=0&pattern=Brick%20Wall&stargazers=1&theme=Dark" >
 
 # Kronos tracker
-Maintaining todos is hard. So, we created a web app that will keep our tasks organized, in a priority-based way that will enhance our productivity daily.
 
+Maintaining todos is hard. So, we created a web app that will keep our tasks organized, group tasks on the basis of their priority and urgency. Display progress reports and other statistics, that will keep us boosted and improve our productivity.
 
 ## Inspiration
 
@@ -41,16 +41,17 @@ Backend:
 6. Since this was completely online, coordinating and discussing ideas and views among teammates was another challenge.
 
 ## Accomplishments that we're proud of
-1. We're proud of being inspired by the idea of scientist **the golden Four quad rule to hack productivity.**
 
-3.  The fact that we were able to make a minimum viable product within 48 hours, is something we are really proud of.
-
-4.  This is the first time we made a full stack web app using Firebase and React and deployed with.
+1. We're proud of being inspired by the idea of author **the Covy's Four quad rule.**
+2. The fact that we were able to make a minimum viable product within 48 hours, is something we are really proud of.
+3. This is the first time we made a full stack web app using Firebase and React and deployed with.
 
 ## What we learned
 
-
-
+1. We learnt to use the collections of firebase and maintain the points system for large no of users.
+2. We learnt to use chart.js, material ui and drag and drop component of react.
+3. Creating our own countdown timer was new for us.
+4. Using GAuth was also something new.
 
 
 ## What's next for Kronos Tracker
@@ -58,11 +59,5 @@ Backend:
 We hope to expand the idea of kronos tracker in the following ways:-
 
 1.  User can login using other social handles or github.
-
 2.  We can maintain a leader board of various users.
-
 3.  Extend the user dashboard from where the user can share their success to social media.
-
-4.  The graphs can be made to display for a range of days according to user choice.
-
-5. Improve the ui of the landing page

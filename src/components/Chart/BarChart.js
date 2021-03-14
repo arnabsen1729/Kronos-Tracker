@@ -1,4 +1,3 @@
-import { red } from '@material-ui/core/colors';
 import React, { useState, useEffect } from 'react';
 import { Bar } from 'react-chartjs-2';
 

@@ -2,26 +2,16 @@ import React, { useState, useEffect } from 'react';
 
 import firebase from 'firebase/app';
 import 'firebase/auth';
-//import { Redirect } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-    faGoogle,
-    faUser,
-    faGooglePlusG
-} from '@fortawesome/free-solid-svg-icons';
+import { faUser } from '@fortawesome/free-solid-svg-icons';
 import Dashboard from '../../components/Dashboard/Dashboard';
-import firebaseConfig from '../../firebaseConfig';
 import { provider } from '../../db/db';
-
-console.log(firebaseConfig);
 
 function Home() {
     let [isAuthorized, setIsAuthorized] = useState(false);
     let [userDetails, setUserDetails] = useState(null);
 
     useEffect(() => {
-        console.log('Mounted...');
-        console.log(isAuthorized);
         firebase.auth().onAuthStateChanged(function (user) {
             if (user) {
                 setUserDetails(user);
@@ -46,7 +36,6 @@ function Home() {
 
                 // The signed-in user info.
                 var user = result.user;
-                // console.log(user);
                 setUserDetails(user);
                 setIsAuthorized(true);
                 firebase
@@ -84,27 +73,13 @@ function Home() {
             });
     };
 
-    // const logOut = () => {
-    //     firebase
-    //         .auth()
-    //         .signOut()
-    //         .then(() => {
-    //             setIsAuthorized(false);
-    //             setUserDetails(null);
-    //             //console.log("Sign out successful", isAuthorized);
-    //         })
-    //         .catch((error) => {
-    //             // An error happened.
-    //         });
-    // };
-
     const landingComp = () => {
         return (
             <div className="home-body">
                 <header className="home-showcase">
                     <div className="home-content md:pt-32">
                         <img
-                            src={process.env.PUBLIC_URL + "/assets/kronos.png"}
+                            src={process.env.PUBLIC_URL + '/assets/kronos.png'}
                             className="home-logo text-center m-auto"
                             alt="Traversy Media"
                         ></img>
@@ -115,15 +90,31 @@ function Home() {
                                 className="flex items-center justify-center bg-red-400 hover:bg-red-700 focus:outline-none text-white font-bold py-2 px-4 rounded w-48 mx-auto "
                             >
                                 Continue with
-                                    <img src={process.env.PUBLIC_URL + "/assets/google.svg"} style={{ height: "25px", width: "25px", paddingLeft: "8px" }}></img>
-
+                                <img
+                                    src={
+                                        process.env.PUBLIC_URL +
+                                        '/assets/google.svg'
+                                    }
+                                    style={{
+                                        height: '25px',
+                                        width: '25px',
+                                        paddingLeft: '8px',
+                                    }}
+                                    alt="Google Sign in"
+                                ></img>
                             </button>
                             <button
                                 onClick={logInAnonymous}
                                 className="bg-blue-500 hover:bg-blue-700 text-white flex items-center focus:outline-none justify-center font-bold py-2 px-4 rounded mx-auto w-52 mt-4"
                             >
-                                Sign in as guest<FontAwesomeIcon icon={faUser} size="2x" className="pl-4" />
-                            </button></div>
+                                Sign in as guest
+                                <FontAwesomeIcon
+                                    icon={faUser}
+                                    size="2x"
+                                    className="pl-4"
+                                />
+                            </button>
+                        </div>
                     </div>
                 </header>
             </div>

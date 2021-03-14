@@ -60,7 +60,6 @@ const addTodoDB = (user, todo) => {
 };
 
 const markTodoDB = (user, todo) => {
-    console.log('Marking.. ', todo);
     let todosRef = db.collection(TODO_CLC).doc(user.uid).collection('todos');
     todosRef
         .where('id', '==', todo.id)
@@ -72,7 +71,6 @@ const markTodoDB = (user, todo) => {
                     completed: true,
                 });
                 // doc.data() is never undefined for query doc snapshots
-                console.log(doc.id, ' => ', doc.data());
             });
         })
         .catch((error) => {
@@ -81,7 +79,6 @@ const markTodoDB = (user, todo) => {
 };
 
 const deleteTodoDB = (user, todo) => {
-    console.log('Deleting... ', todo);
     let todosRef = db.collection(TODO_CLC).doc(user.uid).collection('todos');
     todosRef
         .where('id', '==', todo.id)
@@ -98,7 +95,6 @@ const deleteTodoDB = (user, todo) => {
                         console.log('Error getting documents: ', error);
                     });
                 // doc.data() is never undefined for query doc snapshots
-                console.log(doc.id, ' => ', doc.data());
             });
         })
         .catch((error) => {
@@ -107,7 +103,6 @@ const deleteTodoDB = (user, todo) => {
 };
 
 const fetchTodosDB = async (user) => {
-    console.log('Fetching Docs');
     let todos = [];
     let todosRef = db.collection(TODO_CLC).doc(user.uid).collection('todos');
     await todosRef
@@ -115,13 +110,11 @@ const fetchTodosDB = async (user) => {
         .then((querySnapshot) => {
             querySnapshot.forEach((doc) => {
                 todos.push(doc.data());
-                console.log(doc.id, ' => ', doc.data());
             });
         })
         .catch((error) => {
             console.log('Error getting documents: ', error);
         });
-    console.log('DB.JS', todos);
     return todos;
 };
 
@@ -154,7 +147,6 @@ const updatePoints = async (user, todo) => {
         resp.forEach((document) => {
             const newPoints = parseInt(document.data().points) + points;
             let countArray = document.data().count;
-            console.log(countArray);
             countArray[todo.priority - 1] += 1;
             document.ref.update({
                 date: now,
@@ -166,7 +158,6 @@ const updatePoints = async (user, todo) => {
 };
 
 const fetchPoints = async (user) => {
-    console.log('Fetching Points');
     let points = [];
     let pointsRef = db.collection(TODO_CLC).doc(user.uid).collection('points');
 
@@ -175,13 +166,11 @@ const fetchPoints = async (user) => {
         .then((snap) => {
             snap.forEach((doc) => {
                 points.push(doc.data());
-                console.log(doc.id, ' => ', doc.data());
             });
         })
         .catch((error) => {
             console.log('Error getting documents: ', error);
         });
-    console.log('Points: ', points);
     return points;
 };
 

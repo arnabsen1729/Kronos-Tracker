@@ -131,16 +131,16 @@ function Profile({ user }) {
     }, [allTodos]);
 
     return (
-        <div class="border rounded-lg bg-white m-auto border-gray-400 mt-36 w-2/3 h-auto grid grid-cols-3">
+        <div className="border rounded-lg bg-white m-auto border-gray-400 mt-36 w-2/3 h-auto grid grid-cols-3">
             <div className="mt-12 col-span-2">
                 <div className="flex justify-around">
-                    <div class="">
-                        <div class="w-48 h-48 relative mb-4">
-                            <div class="group w-full h-full rounded-full overflow-hidden shadow-inner text-center bg-purple table cursor-pointer">
+                    <div className="">
+                        <div className="w-48 h-48 relative mb-4">
+                            <div className="group w-full h-full rounded-full overflow-hidden shadow-inner text-center bg-purple table cursor-pointer">
                                 <img
                                     src={userDetails.img}
                                     alt="lovely avatar"
-                                    class="object-cover object-center w-full h-full visible group-hover:hidden"
+                                    className="object-cover object-center w-full h-full visible group-hover:hidden"
                                 />
                             </div>
                         </div>
@@ -154,108 +154,108 @@ function Profile({ user }) {
                         </div>
                     </div>
                 </div>
-                <div class="flex py-2 my-4 text-center px-4 justify-around">
-                    <div class="w-1/3 px-2">
-                        <div class="border-2 border-gray-200 px-4 py-6 rounded-lg">
+                <div className="flex py-2 my-4 text-center px-4 justify-around">
+                    <div className="w-1/3 px-2">
+                        <div className="border-2 border-gray-200 px-4 py-6 rounded-lg">
                             <FontAwesomeIcon icon={faMedal} size="2x" />
-                            <h2 class="title-font font-medium text-3xl text-gray-900">
+                            <h2 className="title-font font-medium text-3xl text-gray-900">
                                 {getTotalPoints(points)}
                             </h2>
-                            <p class="leading-relaxed">Points</p>
+                            <p className="leading-relaxed">Points</p>
                         </div>
                     </div>
-                    <div class="w-1/3 px-2">
-                        <div class="border-2 border-gray-200 px-4 py-6 rounded-lg">
+                    <div className="w-1/3 px-2">
+                        <div className="border-2 border-gray-200 px-4 py-6 rounded-lg">
                             <FontAwesomeIcon icon={faFlagCheckered} size="2x" />
-                            <h2 class="title-font font-medium text-3xl text-gray-900">
+                            <h2 className="title-font font-medium text-3xl text-gray-900">
                                 {getCompletedTodos(allTodos)}
                             </h2>
-                            <p class="leading-relaxed">Completed Todos</p>
+                            <p className="leading-relaxed">Completed Todos</p>
                         </div>
                     </div>
-                    <div class="w-1/3 px-2">
-                        <div class="border-2 border-gray-200 px-4 py-6 rounded-lg">
+                    <div className="w-1/3 px-2">
+                        <div className="border-2 border-gray-200 px-4 py-6 rounded-lg">
                             <FontAwesomeIcon icon={faClipboardList} size="2x" />
-                            <h2 class="title-font font-medium text-3xl text-gray-900">
+                            <h2 className="title-font font-medium text-3xl text-gray-900">
                                 {getLeftTodos(allTodos)}
                             </h2>
-                            <p class="leading-relaxed">Left Todos</p>
+                            <p className="leading-relaxed">Left Todos</p>
                         </div>
                     </div>
                 </div>
             </div>
             <div className="mt-5">
                 <div className="flex flex-col px-5 space-y-6">
-                    <div class="">
-                        <div class="border-l-8 border-red-600 bg-red-200 px-4 py-4">
-                            <div class="flex justify-around">
+                    <div className="">
+                        <div className="border-l-8 border-red-600 bg-red-200 px-4 py-4">
+                            <div className="flex justify-around">
                                 <FontAwesomeIcon
                                     icon={faMedal}
                                     size="2x"
                                     className="my-auto"
                                 />
-                                <div class="text-center">
-                                    <p class="text-sm font-medium text-black-600 ">
+                                <div className="text-center">
+                                    <p className="text-sm font-medium text-black-600 ">
                                         Most productive
                                     </p>
-                                    <p class="text-2xl font-bold text-gray-700">
+                                    <p className="text-2xl font-bold text-gray-700">
                                         {getMostProductiveDay(points)[1]}
                                     </p>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="">
-                        <div class="border-l-8 border-blue-600 bg-blue-200 px-4 py-4">
-                            <div class="flex justify-around">
+                    <div className="">
+                        <div className="border-l-8 border-blue-600 bg-blue-200 px-4 py-4">
+                            <div className="flex justify-around">
                                 <FontAwesomeIcon
                                     icon={faLightbulb}
                                     size="2x"
                                     className="my-auto"
                                 />
-                                <div class="text-center">
-                                    <p class="text-sm font-medium text-black-600 ">
+                                <div className="text-center">
+                                    <p className="text-sm font-medium text-black-600 ">
                                         Max points
                                     </p>
-                                    <p class="text-2xl font-bold text-gray-700">
+                                    <p className="text-2xl font-bold text-gray-700">
                                         {getMostProductiveDay(points)[0]}
                                     </p>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="">
-                        <div class="border-l-8 border-yellow-600 bg-yellow-200 px-4 py-4">
-                            <div class="flex justify-around">
+                    <div className="">
+                        <div className="border-l-8 border-yellow-600 bg-yellow-200 px-4 py-4">
+                            <div className="flex justify-around">
                                 <FontAwesomeIcon
                                     icon={faStar}
                                     size="2x"
                                     className="my-auto"
                                 />
-                                <div class="text-center">
-                                    <p class="text-sm font-medium text-black-600 ">
+                                <div className="text-center">
+                                    <p className="text-sm font-medium text-black-600 ">
                                         Longest Streak
                                     </p>
-                                    <p class="text-2xl font-bold text-gray-700">
+                                    <p className="text-2xl font-bold text-gray-700">
                                         {getLongestStreak(points)}
                                     </p>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="">
-                        <div class="border-l-8 border-green-600 bg-green-200 px-4 py-4">
-                            <div class="flex justify-around">
+                    <div className="">
+                        <div className="border-l-8 border-green-600 bg-green-200 px-4 py-4">
+                            <div className="flex justify-around">
                                 <FontAwesomeIcon
                                     icon={faRunning}
                                     size="2x"
                                     className="my-auto"
                                 />
-                                <div class="text-center">
-                                    <p class="text-sm font-medium text-black-600 ">
+                                <div className="text-center">
+                                    <p className="text-sm font-medium text-black-600 ">
                                         Current Streak
                                     </p>
-                                    <p class="text-2xl font-bold text-gray-700">
+                                    <p className="text-2xl font-bold text-gray-700">
                                         {getCurrentStreak(points)}
                                     </p>
                                 </div>

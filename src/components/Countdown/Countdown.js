@@ -132,9 +132,12 @@ function Countdown({ todo, giveUpFn, completeFn }) {
         const circleDasharray = `${(
             calculateTimeFraction() * FULL_DASH_ARRAY
         ).toFixed(0)} 283`;
-        document
-            .getElementById('base-timer-path-remaining')
-            .setAttribute('strokeDasharray', circleDasharray);
+
+        if (document.getElementById('base-timer-path-remaining')) {
+            document
+                .getElementById('base-timer-path-remaining')
+                .setAttribute('strokeDasharray', circleDasharray);
+        }
     }
 
     const playButton = () => (

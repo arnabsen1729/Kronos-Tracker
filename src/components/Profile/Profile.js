@@ -131,7 +131,7 @@ function Profile({ user }) {
     }, [allTodos]);
 
     return (
-        <div class="border rounded-lg bg-white m-auto border-gray-400 mt-36 w-2/3 h-1/2 grid grid-cols-3">
+        <div class="border rounded-lg bg-white m-auto border-gray-400 mt-36 w-2/3 h-auto grid grid-cols-3">
             <div className="mt-12 col-span-2">
                 <div className="flex justify-around">
                     <div class="">

@@ -22,12 +22,14 @@
 
 /* HOME PAGE */
 
-.home-body {
+/* .home-body {
   background: rgba(0, 0, 0, 0.9);
   margin: 0;
   color: #fff;
+} */
+.gh:hover{
+  fill: rgb(139,92,246);
 }
-
 
 .home-showcase::after {
   content: '';

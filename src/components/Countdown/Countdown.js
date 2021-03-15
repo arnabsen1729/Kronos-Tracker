@@ -153,7 +153,7 @@ function Countdown({ todo, giveUpFn, completeFn }) {
 
     return (
         <div className="countdown-wrap">
-            <div id="app" className="countdown-app border border-red-700">
+            <div id="app" className="countdown-app">
                 <div className="base-timer ">
                     <svg
                         className="base-timer__svg"
@@ -170,7 +170,7 @@ function Countdown({ todo, giveUpFn, completeFn }) {
                             <path
                                 id="base-timer-path-remaining"
                                 strokeDasharray="283"
-                                class={`base-timer__path-remaining ${remainingPathColor}`}
+                                className={`base-timer__path-remaining ${remainingPathColor}`}
                                 d="
                                 M 50, 50
                                 m -45, 0

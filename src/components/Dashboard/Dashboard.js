@@ -17,9 +17,9 @@ function Dashboard({ user, isAuthorized }) {
     let [allTodos, setAllTodos] = useState([]);
     let [showChart, setShowChart] = useState(false);
     let [showProfile, setShowProfile] = useState(false);
-    let headingClassName = (color) => {
-        return `text-3xl font-bold text-${color}-700`;
-    };
+    // let headingClassName = (color) => {
+    //     return `text-3xl font-bold text-${color}-700`;
+    // };
 
     const addTodoToDB = (todo) => {
         addTodoDB(user, todo);
@@ -40,7 +40,7 @@ function Dashboard({ user, isAuthorized }) {
                 setAllTodos(() => todos);
             });
         }
-    }, [isAuthorized]);
+    }, [isAuthorized, user]);
 
     const showChartFn = () => {
         setShowChart(() => true);

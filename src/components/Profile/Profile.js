@@ -115,7 +115,7 @@ function Profile({ user }) {
         fetchTodosDB(user).then((todoArr) => {
             setAllTodos(todoArr);
         });
-    }, []);
+    }, [user]);
 
     useEffect(() => {
         setUserDetails(getUserDetails(user));

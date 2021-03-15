@@ -151,7 +151,7 @@ function TodoCard({
         setTodoItems(() =>
             allTodos.filter((t) => t.priority === priority && !t.completed)
         );
-    }, [allTodos]);
+    }, [allTodos, priority]);
 
     function onDragEnd(result) {
         console.log(result);
